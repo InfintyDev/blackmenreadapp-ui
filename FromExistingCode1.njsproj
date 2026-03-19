@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1b044af4-4ff9-4bff-99f8-03b7b385cdc7}</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <ProjectView>ShowAllFiles</ProjectView>
+    <StartupFile>server.js</StartupFile>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">17.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <ItemGroup>
+    <Content Include="app.json" />
+    <Content Include="server.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="package-lock.json" />
+    <Content Include="package.json" />
+    <Content Include="README.md" />
+    <Content Include="App.js" />
+    <Content Include="GetFile.js" />
+    <Content Include="GetSaveUserFromServer.js" />
+    <Content Include="global.js" />
+    <Content Include="index.js" />
+    <Content Include="PageHolder.js" />
+    <Content Include="App\other.txt" />
+    <Content Include="assets\adaptive-icon.png" />
+    <Content Include="assets\favicon.png" />
+    <Content Include="assets\icon.png" />
+    <Content Include="assets\snack-icon.png" />
+    <Content Include="assets\splash-icon.png" />
+    <Content Include="assets\BlackMenReadLogo.jpg" />
+    <Content Include="assets\Log.json" />
+    <Content Include="components\AssetExample.js" />
+    <Content Include="components\SaveLoadUserLocal.js" />
+    <Content Include="components\InfoHolders\BookLog.js" />
+    <Content Include="components\InfoHolders\User.js" />
+    <Content Include="components\InfoHolders\UserHolder.js" />
+    <Content Include="components\Objects\BookAndLink.js" />
+    <Content Include="components\Objects\Button.js" />
+    <Content Include="components\Objects\CalanderDay.js" />
+    <Content Include="components\Objects\Calendar.js" />
+    <Content Include="components\Objects\ChangePageButton.js" />
+    <Content Include="components\Objects\DropDown.js" />
+    <Content Include="components\Objects\DropDownSelector.js" />
+    <Content Include="components\Objects\HeaderOptions.js" />
+    <Content Include="components\Objects\LogBoxes.js" />
+    <Content Include="components\Objects\MakeScroll.js" />
+    <Content Include="components\Objects\PopUp.js" />
+    <Content Include="components\Objects\SceneSelector.js" />
+    <Content Include="components\Objects\SideBar.js" />
+    <Content Include="components\Objects\SignInBox.js" />
+    <Content Include="components\Objects\StudentBadges.js" />
+    <Content Include="components\Objects\Styles.js" />
+    <Content Include="components\Objects\TestObject.js" />
+    <Content Include="components\Objects\Timer.js" />
+    <Content Include="components\Objects\TypeBox.js" />
+    <Content Include="components\Objects\UpComingEvents.js" />
+    <Content Include="components\Pages\AboutPage.js" />
+    <Content Include="components\Pages\BookList.js" />
+    <Content Include="components\Pages\CalanderPage.js" />
+    <Content Include="components\Pages\CreateAcountPage.js" />
+    <Content Include="components\Pages\DeBugPage.js" />
+    <Content Include="components\Pages\FrontPage.js" />
+    <Content Include="components\Pages\HelpPage.js" />
+    <Content Include="components\Pages\LogInPage.js" />
+    <Content Include="components\Pages\PageNotFound.js" />
+    <Content Include="components\Pages\PastLogsPage.js" />
+    <Content Include="components\Pages\RecordTimePage.js" />
+    <Content Include="components\Pages\SettingsAndPrefrences.js" />
+    <Content Include="components\Pages\UserInfoPage.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App" />
+    <Folder Include="assets" />
+    <Folder Include="components" />
+    <Folder Include="components\InfoHolders" />
+    <Folder Include="components\Objects" />
+    <Folder Include="components\Pages" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:48022/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost:1337</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

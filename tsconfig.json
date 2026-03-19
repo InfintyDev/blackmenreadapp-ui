@@ -1,0 +1,4 @@
+{
+  "compilerOptions": {},
+  "extends": "@react-native/typescript-config"
+}

@@ -1,0 +1,3 @@
+C:\Users\tiffa\OneDrive\Documents\Desktop\Black Men Read App\bmr_mvp\obj\Debug\FromExistingCode1.njsproj.AssemblyReference.cache
+C:\Users\tiffa\OneDrive\Documents\Desktop\Black Men Read App\bmr_mvp\obj\Debug\FromExistingCode1.njsproj.CoreCompileInputs.cache
+C:\Users\tiffa\OneDrive\Documents\Desktop\Black Men Read App\bmr_mvp\bin\Microsoft.NodejsTools.WebRole.dll
