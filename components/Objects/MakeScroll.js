@@ -5,7 +5,11 @@ import {
   View,
   Button,
   StatusBar,
+  Dimensions,
+
+
 } from 'react-native';
+import { useState } from 'react';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 // You can import supported modules from npm
 import { Card } from 'react-native-paper';
@@ -18,7 +22,13 @@ import styles from '../Objects/Styles';
 
 
 export default function MakeScroll(content, inputheight) {
-
+  /*
+  const [window, setWindow] = useState(Dimensions.get('window'))
+  const [height, setHeight] = useState(0);
+  Dimensions.addEventListener('change', ({ window }) => {
+    setWindow(window)
+  });
+  */
   return (
 
 
