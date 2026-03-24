@@ -116,6 +116,7 @@ export default function PastLogsPage() {
   const [height, setHeight] = useState(0);
   Dimensions.addEventListener('change', ({ window }) => {
     setWindow(window)
+
   });
   const getUserToken = async () => {
     try {
@@ -141,6 +142,9 @@ export default function PastLogsPage() {
       setUserAspects(toset)
       setShouldSetUserAspects(false)
     }
+  }
+  const heightFunction = () => {
+    return window.height;
   }
 
   const [seeConectedUserLogs, setSeeConnectedUserLogs] = useState(false)
@@ -232,14 +236,14 @@ export default function PastLogsPage() {
     }}><Card style={styles.paddedCard}><Text>{students}</Text></Card>
 
       <View style={styles.containerColoum}>
-        {MakeScroll(<View style={styles.containerColoum}>{userAspects['ConnectedAcounts'].map((connectedUser) => studentSelector(connectedUser))}</View>, window.height
+        {MakeScroll(<View style={styles.containerColoum}>{userAspects['ConnectedAcounts'].map((connectedUser) => studentSelector(connectedUser))}</View>, heightFunction
         )}
       </View>
     </View>
   }
 
   console.log(userAspects)
-
+  console.log(" Window Height: " + window.height)
 
   return (
     <View style={styles.containerRow}>
@@ -259,7 +263,7 @@ export default function PastLogsPage() {
         {userAspects['UserType'] == 'Student' && MakeScroll(
           userAspects['Logs'] &&
           userAspects['Logs'].map((log) => GetTheLogLook(log['Notes'], log['Summery'], log['Book'], log['PageFirst'], log['PageLast'], log['Time'], log['Date'], log['LoggedForName'], log['LoggedUnderName']))
-          , window.height
+          , heightFunction
         )}
 
 

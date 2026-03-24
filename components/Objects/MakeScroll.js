@@ -20,30 +20,34 @@ import SideBar from '../Objects/SideBar';
 import styles from '../Objects/Styles';
 
 
+export default function MakeScroll(content, inputheight = 200) {
 
-export default function MakeScroll(content, inputheight) {
+
   /*
-  const [window, setWindow] = useState(Dimensions.get('window'))
-  const [height, setHeight] = useState(0);
-  Dimensions.addEventListener('change', ({ window }) => {
-    setWindow(window)
-  });
-  */
+    const [window, setWindow] = useState(Dimensions.get('window'))
+    const [height, setHeight] = useState(0);
+    Dimensions.addEventListener('change', ({ window }) => {
+      setWindow(window)
+    });
+  
+    const sty = {
+      height: window.height
+    };
+    console.log("Height: " + inputheight)
+    */
   return (
 
 
 
-    <SafeAreaProvider>
-      <SafeAreaView styles={stylem.container} edges={['top']}>
-        <ScrollView
-          style={{ height: inputheight }}
-          showsVerticalScrollIndicator={true}>
-          <View>
-            {content}
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </SafeAreaProvider>
+
+    <ScrollView
+      style={{ height: inputheight }}
+      showsVerticalScrollIndicator={true}>
+      <View>
+        {content}
+      </View>
+    </ScrollView>
+
 
   );
 }
