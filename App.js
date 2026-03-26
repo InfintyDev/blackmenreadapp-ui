@@ -77,13 +77,14 @@ const RootStack = createNativeStackNavigator({
     },
     Books: {
       screen: BookList,
-      options: { title: 'Welcome' },
+      options: { title: 'Back' },
     },
     Calander: {
       screen: CalanderPage,
-      options: { title: 'Welcome' },
+      options: { title: 'Back' },
     }, RecordTime: {
       screen: RecordTimePage,
+      options: { title: 'Back' },
     }, SignUpPage: {
       screen: CreateAcountPage,
       options: HeaderOptions.signIn
@@ -98,7 +99,7 @@ const RootStack = createNativeStackNavigator({
       options: HeaderOptions.signIn
     }, PastLogs: {
       screen: PastLogsPage,
-      options: HeaderOptions.signIn
+      options: { title: 'Back' },
     }
 
 

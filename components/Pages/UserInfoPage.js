@@ -25,6 +25,7 @@ export default function UserInfoPage() {
   const [userAspects, setUserAspects] = useState({});
   const [shouldSetUserAspects, setShouldSetUserAspects] = useState(true);
   const [showAddAcountPopup, setShowAddAcountPopup] = useState(false)
+  const [showAcountManagmentPopup, setShowAcountManagmentPopup] = useState(false)
   const [addUserInputEmail, setAddUserInputEmail] = useState('')
   const [addUserInputUserId, setAddUserInputUserId] = useState('')
   const [connectUserType, setConnectUserType] = useState('')
@@ -180,6 +181,45 @@ export default function UserInfoPage() {
   const removeConnectedAcount = (acount) => {
     console.log(acount)
   }
+  const ManagementWindow = (acount) => {
+    console.log(acount)
+    return (<Modal visible={showAcountManagmentPopup} onRequestClose={() => setShowAcountManagmentPopup(false)} animationType="slide"
+      transparent={true}>
+      <View style={styles.centeredView}>
+        <View style={{
+          alignContent: 'center', backgroundColor: 'white', shadowColor: '#000',
+          shadowOffset: {
+            width: 0,
+            height: 2,
+          },
+          shadowOpacity: 0.25,
+          shadowRadius: 4,
+          borderRadius: 10,
+        }}>
+          <View style={styles.cornerView}>
+            <Pressable
+              style={[styles.button, styles.buttonClose]}
+              onPress={() => setShowAcountManagmentPopup(false)}>
+              <Text>X</Text>
+            </Pressable>
+          </View>
+          <View style={{ ...styles.modalViewNoShadows, padding: 10 }}>
+            <Text>User Name: {acount['UserName']}</Text>
+            <Text>Email: {acount['Email']}</Text>
+            <Text>ID: {acount['id']}</Text>
+            <Pressable
+              style={[styles.button, styles.buttonClose]}
+              onPress={() => setShowAcountManagmentPopup(false)}>
+              <Text>Disconnect Acount</Text>
+            </Pressable>
+          </View>
+        </View>
+      </View>
+    </Modal>)
+  }
+  const OpenManagementWindow = (acount) => {
+    setShowAcountManagmentPopup(true)
+  }
 
   const ConnectedUserView = (acount) => {
     const userName = acount['UserName']
@@ -196,8 +236,8 @@ export default function UserInfoPage() {
           {email}
 
         </Text>
-        <Pressable onPress={() => removeConnectedAcount(acount)}><Card style={{ ...styles.paddedCard, backgroundColor: 'red' }}><Text>Manage</Text></Card></Pressable>
-
+        <Pressable onPress={() => OpenManagementWindow(acount)}><Card style={{ ...styles.paddedCard, backgroundColor: 'red' }}><Text>Manage</Text></Card></Pressable>
+        {ManagementWindow(acount)}
         {ChagePageButton('See Logs', 'PastLogs')}
 
       </Card>

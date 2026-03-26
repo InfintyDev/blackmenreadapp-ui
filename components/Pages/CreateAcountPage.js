@@ -7,7 +7,7 @@ import {
   Image,
 } from 'react-native';
 import { useState } from 'react';
-
+import { useNavigation } from '@react-navigation/native';
 // You can import supported modules from npm
 import { Card, TextInput } from 'react-native-paper';
 import ChagePageButton from '../Objects/ChangePageButton';
@@ -45,7 +45,7 @@ function userNameInvalid(userName = '') {
   return false;
 }
 function SignUpButtons(userType = '') {
-
+  const [preventButtonPress, setPreventButtonPress] = useState(false);
   const [userName, setUserName] = useState()
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
@@ -59,7 +59,24 @@ function SignUpButtons(userType = '') {
 
   const showPasswordButton = <Button title='a' onPress={() => setShowPassword(!showPassword)} />;
   const showConfirmPasswordButton = <Button title='a' onPress={() => setShowConfirmPassword(!showConfirmPassword)} />;
+  var navigation = null;
+  try {
+    if (useNavigation()) {
+      navigation = useNavigation();
 
+    }
+
+  }
+  catch {
+
+  }
+
+
+  const pressedButton = (name) => {
+    //alert(scr)
+
+    navigation.navigate(name);
+  };
   const CreateAcountConfirmation = (email = '', password = '', confirmPassword = '', userName = '', userType,) => {
 
     var noUserIssues = true;
@@ -93,11 +110,11 @@ function SignUpButtons(userType = '') {
   }
 
   async function CreateAcount(email = '', password = '', confirmPassword = '', userName = '', userType,) {
-    if (CreateAcountConfirmation(email, password, confirmPassword, userName, userType)) {
+    if (CreateAcountConfirmation(email, password, confirmPassword, userName, userType) && !preventButtonPress) {
 
-
+      setPreventButtonPress(true)
       await addUserRequest(email, password, userName, userType)
-
+      pressedButton('LogInSelectorPage')
     }
   }
 
