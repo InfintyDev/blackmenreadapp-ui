@@ -60,14 +60,19 @@ export default function UserInfoPage() {
   console.log(Object.keys(bookTesting))
   const findUser = () => { };
   const studentBadges = () => {
-    return <View style={styles.containerColoum}>
-      <Card style={styles.paddedCard}><Text>Badges</Text></Card>
+    if (userAspects['ReadingStats']) {
+      if (userAspects['ReadingStats']['TotalTimeRead']) {
+        return <View style={styles.containerColoum}>
+          <Card style={styles.paddedCard}><Text>Badges</Text></Card>
 
-      <Card style={styles.paddedCard}><Text>Total Time Read: {userAspects['ReadingStats']['TotalTimeRead']} </Text></Card>
-      <Card style={styles.paddedCard}><Text>Books Read: {Object.keys(userAspects['ReadingStats']['BooksRead']).map((value) => <View><Text> "{value}": {userAspects['ReadingStats']['BooksRead'][value]} </Text></View>)} </Text></Card>
+          <Card style={styles.paddedCard}><Text>Total Time Read: {userAspects['ReadingStats']['TotalTimeRead']} </Text></Card>
+          <Card style={styles.paddedCard}><Text>Books Read: {Object.keys(userAspects['ReadingStats']['BooksRead']).map((value) => <View><Text> "{value}": {userAspects['ReadingStats']['BooksRead'][value]} </Text></View>)} </Text></Card>
 
 
-    </View >;
+        </View >;
+      }
+    }
+
 
   };
   const addChildAcount = () => {

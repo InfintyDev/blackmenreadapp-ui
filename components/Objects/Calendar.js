@@ -249,6 +249,8 @@ const DateSelector = (events = []) => {
   const monthInputBox = (
     <TextInput
       onChangeText={(theMonth) =>
+
+
         ChangeCalanderPage(selectedYear, parseInt(theMonth, 10) - 1)
       }
       defaultValue={new Date().getMonth() + 1}></TextInput>
@@ -296,11 +298,14 @@ const DateSelector = (events = []) => {
     );
 
     if (
-      (/^\d+$/.test(toMonth) &&
+      ((/^\d+$/.test(toMonth) &&
         changeCalander != true &&
         /^\d+$/.test(toYear) &&
         parseInt(toMonth, 10) != selectedMonth) ||
-      parseInt(toYear, 10) != selectedYear
+        parseInt(toYear, 10) != selectedYear)
+      && parseInt(toMonth, 10) <= 12
+
+
     ) {
       console.log(parseInt(toMonth, 10) + ':' + parseInt(toYear, 10));
 
