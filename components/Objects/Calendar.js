@@ -322,6 +322,9 @@ const DateSelector = (events = []) => {
       //updateDatesInInput();
     }
   };
+  const ChangeMonth = () => {
+    console.log("pressed Button")
+  }
   //ChangeCalanderPage(selectedYear, selectedMonth)
   return (
     <View style={styles.calanderWrap}>
@@ -332,12 +335,12 @@ const DateSelector = (events = []) => {
 
         <View >
           <View style={styles.containerRow}>
-            <View style={{ ...styles.flexDefaltBlank }}> <Button style={styles.button}></Button></View>
+            <View style={{ ...styles.flexDefaltBlank }}> <Button style={styles.button} onPress={ChangeMonth()}></Button></View>
             <View style={styles.calanderInput}>
               <Text style={styles.monthInput}>Year:{yearInputBox}</Text>
               <Text style={styles.monthInput}>Month:{monthInputBox}</Text>
             </View>
-            <View style={{ ...styles.flexDefaltBlank }}><Button style={styles.button}></Button></View>
+            <View style={{ ...styles.flexDefaltBlank }}><Button style={styles.button} onPress={ChangeMonth()}></Button></View>
           </View>
         </View>
 
