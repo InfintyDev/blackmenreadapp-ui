@@ -44,14 +44,14 @@ const LogBoxes = (time, userData = {}) => {
   const pageFirstLogBox = InputBoxNumbers(
 
     '',
-    styles.paragraphRowFlexable,
-    5, styles.paragraphRowFlexable,
+    styles.paragraphRowFlexable
+
 
   );
   const pageLastLogBox = InputBoxNumbers(
     '',
-    styles.paragraphRowFlexable,
-    5, styles.paragraphRowFlexable,
+    styles.paragraphRowFlexable
+
 
   );
 

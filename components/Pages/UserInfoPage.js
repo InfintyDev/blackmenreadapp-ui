@@ -22,10 +22,12 @@ import saveUserToken from '../SaveLoadUserLocal';
 
 
 export default function UserInfoPage() {
+  const [mangagementAcount, setManagementAcount] = useState({ Email: '', UserName: '', id: '' })
   const [userAspects, setUserAspects] = useState({});
   const [shouldSetUserAspects, setShouldSetUserAspects] = useState(true);
   const [showAddAcountPopup, setShowAddAcountPopup] = useState(false)
   const [showAcountManagmentPopup, setShowAcountManagmentPopup] = useState(false)
+
   const [addUserInputEmail, setAddUserInputEmail] = useState('')
   const [addUserInputUserId, setAddUserInputUserId] = useState('')
   const [connectUserType, setConnectUserType] = useState('')
@@ -60,14 +62,22 @@ export default function UserInfoPage() {
   console.log(Object.keys(bookTesting))
   const findUser = () => { };
   const studentBadges = () => {
-    return <View style={styles.containerColoum}>
-      <Card style={styles.paddedCard}><Text>Badges</Text></Card>
 
-      <Card style={styles.paddedCard}><Text>Total Time Read: {userAspects['ReadingStats']['TotalTimeRead']} </Text></Card>
-      <Card style={styles.paddedCard}><Text>Books Read: {Object.keys(userAspects['ReadingStats']['BooksRead']).map((value) => <View><Text> "{value}": {userAspects['ReadingStats']['BooksRead'][value]} </Text></View>)} </Text></Card>
+    if (userAspects['ReadingStats'] != null) {
+      if (userAspects['ReadingStats']['TotalTimeRead']) {
+        //console.log(Object.keys(userAspects['ReadingStats']['BooksRead']))
+        //console.log(Object.keys(userAspects['ReadingStats']['BooksRead']).map((value) => <View><Text> "{value}": {userAspects['ReadingStats']['BooksRead'][value]} </Text></View>))
+        return <View style={styles.containerColoum}>
+          <Card style={styles.paddedCard}><Text>Badges</Text></Card>
+
+          <Card style={styles.paddedCard}><Text>Total Time Read: {userAspects['ReadingStats']['TotalTimeRead']} </Text></Card>
+          <Card style={styles.paddedCard}><Text>Books Read: {Object.keys(userAspects['ReadingStats']['BooksRead']).map((value) => <View><Text> "{value}": {userAspects['ReadingStats']['BooksRead'][value]['TimeRead']} </Text></View>)} </Text></Card>
 
 
-    </View >;
+        </View >;
+      }
+    }
+
 
   };
   const addChildAcount = () => {
@@ -217,13 +227,19 @@ export default function UserInfoPage() {
       </View>
     </Modal>)
   }
-  const OpenManagementWindow = (acount) => {
-    setShowAcountManagmentPopup(true)
-  }
+
+
 
   const ConnectedUserView = (acount) => {
+    //const [showAcountManagmentPopup, setShowAcountManagmentPopup] = useState(false)
     const userName = acount['UserName']
     const email = acount['Email']
+    console.log('AcountView')
+    console.log(acount)
+    const changeManagement = () => {
+      setShowAcountManagmentPopup(true)
+      setManagementAcount(acount)
+    }
     return (<View style={styles.centerer}>
       <Card style={styles.paddedCard}>
         <Text>
@@ -236,8 +252,8 @@ export default function UserInfoPage() {
           {email}
 
         </Text>
-        <Pressable onPress={() => OpenManagementWindow(acount)}><Card style={{ ...styles.paddedCard, backgroundColor: 'red' }}><Text>Manage</Text></Card></Pressable>
-        {ManagementWindow(acount)}
+        <Pressable onPress={() => changeManagement()}><Card style={{ ...styles.paddedCard, backgroundColor: 'red' }}><Text>Manage</Text></Card></Pressable>
+        {ManagementWindow(mangagementAcount)}
         {ChagePageButton('See Logs', 'PastLogs')}
 
       </Card>

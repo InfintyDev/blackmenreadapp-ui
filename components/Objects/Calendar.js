@@ -249,6 +249,8 @@ const DateSelector = (events = []) => {
   const monthInputBox = (
     <TextInput
       onChangeText={(theMonth) =>
+
+
         ChangeCalanderPage(selectedYear, parseInt(theMonth, 10) - 1)
       }
       defaultValue={new Date().getMonth() + 1}></TextInput>
@@ -296,11 +298,14 @@ const DateSelector = (events = []) => {
     );
 
     if (
-      (/^\d+$/.test(toMonth) &&
+      ((/^\d+$/.test(toMonth) &&
         changeCalander != true &&
         /^\d+$/.test(toYear) &&
         parseInt(toMonth, 10) != selectedMonth) ||
-      parseInt(toYear, 10) != selectedYear
+        parseInt(toYear, 10) != selectedYear)
+      && parseInt(toMonth, 10) <= 12
+
+
     ) {
       console.log(parseInt(toMonth, 10) + ':' + parseInt(toYear, 10));
 
@@ -317,6 +322,9 @@ const DateSelector = (events = []) => {
       //updateDatesInInput();
     }
   };
+  const ChangeMonth = () => {
+    console.log("pressed Button")
+  }
   //ChangeCalanderPage(selectedYear, selectedMonth)
   return (
     <View style={styles.calanderWrap}>
@@ -327,12 +335,12 @@ const DateSelector = (events = []) => {
 
         <View >
           <View style={styles.containerRow}>
-            <View style={{ ...styles.flexDefaltBlank }}> <Button style={styles.button}></Button></View>
+            <View style={{ ...styles.flexDefaltBlank }}> <Button style={styles.button} onPress={ChangeMonth()}></Button></View>
             <View style={styles.calanderInput}>
               <Text style={styles.monthInput}>Year:{yearInputBox}</Text>
               <Text style={styles.monthInput}>Month:{monthInputBox}</Text>
             </View>
-            <View style={{ ...styles.flexDefaltBlank }}><Button style={styles.button}></Button></View>
+            <View style={{ ...styles.flexDefaltBlank }}><Button style={styles.button} onPress={ChangeMonth()}></Button></View>
           </View>
         </View>
 

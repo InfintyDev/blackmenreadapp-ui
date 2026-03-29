@@ -2,7 +2,7 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const pathToWebSite = 'https://blackmenreadapp-api.onrender.com'
-
+//const pathToWebSite = 'http://localhost:5000'
 export const saveUserToServer = async (userData) => {
   try {
     const response = await axios.post(
