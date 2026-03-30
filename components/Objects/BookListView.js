@@ -51,11 +51,11 @@ export default function BookListView(listOfBooks) {
                     value={searchString} />
             </Card>
             < SafeAreaProvider >
-                <SafeAreaView styles={stylem.container} edges={['top']} >
+                <SafeAreaView edges={['top']} >
                     <ScrollView
                         style={stylem.scrollView}
                         showsVerticalScrollIndicator={true} >
-                        <View>
+                        <View style={{ flex: 1 }}>
                             {
                                 listOfBooks.map((bookInst) => (
                                     <View>
@@ -86,6 +86,7 @@ const stylem = StyleSheet.create({
         padding: 0,
         height: 600,
         maxWidth: "100%",
+        width: "100%",
         alignContent: "center",
         alignSelf: 'center',
 

@@ -236,7 +236,7 @@ export default function PastLogsPage() {
     }}><Card style={styles.paddedCard}><Text>{students}</Text></Card>
 
       <View style={styles.containerColoum}>
-        {MakeScroll(<View style={styles.containerColoum}>{userAspects['ConnectedAcounts'].map((connectedUser) => studentSelector(connectedUser))}</View>, heightFunction
+        {MakeScroll(<View style={styles.containerRow}>{userAspects['ConnectedAcounts'].map((connectedUser) => studentSelector(connectedUser))}</View>, heightFunction
         )}
       </View>
     </View>

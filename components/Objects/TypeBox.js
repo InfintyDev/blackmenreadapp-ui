@@ -108,11 +108,11 @@ export const InputBoxNumbers = (
 
   const inputer = (
     <TextInput
-      style={styles.flexDefalt}
+      style={{ width: '100%', height: '100%' }}
       value={inputedValue}
       onChangeText={(inputedValue) => ChangeValue(inputedValue)}
       multiline={multi}
-      numberOfLines={1} > </TextInput>
+    > </TextInput>
   );
 
   return [

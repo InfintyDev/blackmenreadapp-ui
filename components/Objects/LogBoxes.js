@@ -25,15 +25,16 @@ import * as logj from '../../assets/Log.json';
 import User, { StudentUser } from '../InfoHolders/User';
 import UserHolder from '../InfoHolders/UserHolder';
 
-
+import SideBar from '../Objects/SideBar';
 import saveUserToken from '../SaveLoadUserLocal';
 import { addUserLogs, GetConnectedUser } from '../../GetSaveUserFromServer'
 
 const LogBoxes = (time, userData = {}) => {
   //const [logInst, setLogInst] = useState();
-  const notesLogBox = TypeBox('Notes');
-  const summeryLogBox = TypeBox('Summery');
-  const bookLogBox = TypeBox('Book', '', styles.paragraphFlexable);
+  const styView = stylem.paragraphRowFlexable;
+  const notesLogBox = TypeBox('Notes', '', styView);
+  const summeryLogBox = TypeBox('Summery', '', styView);
+  const bookLogBox = TypeBox('Book', '', styView);
 
 
 
@@ -44,13 +45,15 @@ const LogBoxes = (time, userData = {}) => {
   const pageFirstLogBox = InputBoxNumbers(
 
     '',
-    styles.paragraphRowFlexable
+    styles.paragraphRowFlexable,
+    90, styView
 
 
   );
   const pageLastLogBox = InputBoxNumbers(
     '',
-    styles.paragraphRowFlexable
+    styles.paragraphRowFlexable,
+    90, styView
 
 
   );
@@ -481,4 +484,26 @@ const LogBoxes = (time, userData = {}) => {
     </View>
   ];
 };
+
+
+const stylem = StyleSheet.create({
+
+  paragraphRowFlexable: {
+    backgroundColor: 'lightgray',
+    flex: 1,
+
+    flexDirection: 'row',
+    margin: 3,
+    minHeight: 20,
+    borderRadius: 5,
+    width: '100%', borderRadius: 10,
+    borderColor: '#6b6a6f',
+    borderWidth: 3,
+  },
+  text: {
+    fontSize: 42,
+    padding: 12,
+  },
+});
+
 export default LogBoxes

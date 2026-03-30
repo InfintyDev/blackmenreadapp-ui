@@ -18,7 +18,7 @@ import ChangePageButton from '../Objects/ChangePageButton';
 import { connectUserTo, saveUserDataLocaly } from '../../GetSaveUserFromServer';
 import ChagePageButton from '../Objects/ChangePageButton';
 import saveUserToken from '../SaveLoadUserLocal';
-
+import MakeScroll from '../Objects/MakeScroll';
 
 
 export default function UserInfoPage() {
@@ -87,6 +87,9 @@ export default function UserInfoPage() {
     return <Pressable onPress={() => ConnectAcount('Student')}><Card style={styles.paddedCard}><Text>Add Student Acount</Text></Card></Pressable>;
   };
 
+  const pressChangeSettings = () => {
+    console.log('change')
+  }
 
 
   const ConnectAcount = (acountType = '') => {
@@ -189,6 +192,8 @@ export default function UserInfoPage() {
 
 
   const removeConnectedAcount = (acount) => {
+    setShowAcountManagmentPopup(false)
+    console.log("Disconnect")
     console.log(acount)
   }
   const ManagementWindow = (acount) => {
@@ -219,7 +224,7 @@ export default function UserInfoPage() {
             <Text>ID: {acount['id']}</Text>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => setShowAcountManagmentPopup(false)}>
+              onPress={() => removeConnectedAcount(acount)}>
               <Text>Disconnect Acount</Text>
             </Pressable>
           </View>
@@ -267,7 +272,7 @@ export default function UserInfoPage() {
 
     return (<View>
       <Text>
-        {connectedAcoutsMapped}
+        {MakeScroll(connectedAcoutsMapped)}
       </Text>
 
     </View>)
@@ -320,7 +325,25 @@ export default function UserInfoPage() {
 
 
         </View>
+        <View style={{ flexDirection: 'column' }}>
+          <Card style={styles.paddedCard}>
+            <Pressable style={[styles.button, styles.buttonClose]} onPress={() => pressChangeSettings()}>
+              <Text style={styles.textStyle}>
+                Change Email
+              </Text>
+            </Pressable>
+
+          </Card>
+          <Card style={styles.paddedCard}>
+            <Pressable style={[styles.button, styles.buttonClose]} onPress={() => pressChangeSettings()}>
+              <Text style={styles.textStyle}>
+                Change User Name
+              </Text>
+            </Pressable>
+
+          </Card>
+        </View>
       </View>
-    </View>
+    </View >
   );
 }
