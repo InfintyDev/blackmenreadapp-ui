@@ -43,7 +43,7 @@ export default function BookListView(listOfBooks) {
 
         < View style={{ ...styles.containerColoum }} >
             <Card style={styles.paddedCardHalf}>
-                <Text style={styles.headerText}> Book List </Text>
+                <Text style={styles.headerText}> Book Recomendations </Text>
             </Card>
             < Card >
                 <TextInput

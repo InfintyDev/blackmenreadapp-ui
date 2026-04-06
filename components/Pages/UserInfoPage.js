@@ -282,7 +282,26 @@ export default function UserInfoPage() {
 
   }
 
+  const settings = () => {
+    <View style={{ flexDirection: 'column' }}>
+      <Card style={styles.paddedCard}>
+        <Pressable style={[styles.button, styles.buttonClose]} onPress={() => pressChangeSettings()}>
+          <Text style={styles.textStyle}>
+            Change Email
+          </Text>
+        </Pressable>
 
+      </Card>
+      <Card style={styles.paddedCard}>
+        <Pressable style={[styles.button, styles.buttonClose]} onPress={() => pressChangeSettings()}>
+          <Text style={styles.textStyle}>
+            Change User Name
+          </Text>
+        </Pressable>
+
+      </Card>
+    </View>
+  }
 
 
   return (
@@ -325,24 +344,7 @@ export default function UserInfoPage() {
 
 
         </View>
-        <View style={{ flexDirection: 'column' }}>
-          <Card style={styles.paddedCard}>
-            <Pressable style={[styles.button, styles.buttonClose]} onPress={() => pressChangeSettings()}>
-              <Text style={styles.textStyle}>
-                Change Email
-              </Text>
-            </Pressable>
 
-          </Card>
-          <Card style={styles.paddedCard}>
-            <Pressable style={[styles.button, styles.buttonClose]} onPress={() => pressChangeSettings()}>
-              <Text style={styles.textStyle}>
-                Change User Name
-              </Text>
-            </Pressable>
-
-          </Card>
-        </View>
       </View>
     </View >
   );

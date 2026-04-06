@@ -98,9 +98,9 @@ export default function CalanderPage() {
 
 
   interprateData()
-  const scale = 1.35;
+  const scale = 1.0;
   const CalandarWithEvents = <View>{Calendar(calenderData)}</View>
-  const CalandarWithEventsLarge = <View style={{ transform: [{ scale: scale }], marginTop: 70 }}>{Calendar(calenderData)}</View>
+  const CalandarWithEventsLarge = <View style={{ transform: [{ scale: scale }], marginTop: 0 }}>{Calendar(calenderData)}</View>
 
 
   return (
@@ -109,7 +109,7 @@ export default function CalanderPage() {
       <View style={styles.containerRow}>
         <SideBar />
 
-        {MakeScroll(CalandarWithEventsLarge, 420 * scale)}
+        {MakeScroll(CalandarWithEventsLarge, 500 * scale)}
 
       </View>
     </View>

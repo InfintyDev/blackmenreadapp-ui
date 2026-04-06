@@ -165,6 +165,9 @@ const Disp = () => {
 
 
 export default App;
+export const PhoneView = () => {
+  return true;
+}
 export const AppName = () => {
   return 'http://localhost:8081/'
 }

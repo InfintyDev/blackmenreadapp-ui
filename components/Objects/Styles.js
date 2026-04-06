@@ -843,6 +843,12 @@ const styles = StyleSheet.create({
     padding: 8,
     justifyContent: 'center',
   },
+  centeredContainerBlankBackGround: {
+    flex: 1,
+
+    padding: 8,
+    justifyContent: 'center',
+  },
   paragraph: {
     margin: 24,
     fontSize: 18,

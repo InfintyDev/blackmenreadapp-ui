@@ -63,7 +63,7 @@ export default function LogInSelectorPage() {
             </View>
 
 
-            <View style={{ ...styles.centerer, flex: .7 }}>
+            <View style={{ ...styles.centerer, flex: .8 }}>
                 <View style={{ ...styles.paddedCard, margin: 2, padding: 5 }}>
                     {ChagePageButton('Sign Up', 'SignUpPage')}
                 </View>

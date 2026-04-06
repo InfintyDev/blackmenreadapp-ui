@@ -13,7 +13,7 @@ import LogBoxes from '../Objects/LogBoxes';
 import SideBar from '../Objects/SideBar';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import User from '../InfoHolders/User';
-
+import App, { PhoneView } from '../../App';
 
 export default function RecordTimePage() {
   const [userAspects, setUserAspects] = useState({});
@@ -55,7 +55,7 @@ export default function RecordTimePage() {
         <SideBar />
 
         <View style={styles.containerPlain}>
-          {stopWatch[0]}
+          {stopWatch[0] && !PhoneView}
 
           {theLogBox[0]}
         </View>

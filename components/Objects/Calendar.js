@@ -16,12 +16,33 @@ import PopUpBox from './PopUp';
 import TypeBox from './TypeBox';
 import CalendarDay from './CalanderDay';
 import { CalendarDayProps, EventProps } from './CalanderTypes'
+import App, { PhoneView } from '../../App';
 
+
+const calanderBlockWidth = () => {
+
+  if (PhoneView) {
+    return (40)
+  }
+  else {
+    return (50)
+  }
+}
+
+const calanderTextSize = () => {
+
+  if (PhoneView) {
+    return (10)
+  }
+  else {
+    return (20)
+  }
+}
 
 const daysDisplay = (day) => {
   return (
-    <View style={styles.calanderDayBlock}>
-      <Text style={styles.dayOfTheWeekText}>{day}</Text>
+    <View style={{ ...styles.calanderDayBlock, width: calanderBlockWidth() }}>
+      <Text style={{ ...styles.dayOfTheWeekText, fontSize: calanderTextSize() }}>{day}</Text>
     </View>
   );
 };
@@ -345,8 +366,8 @@ const DateSelector = (events = []) => {
         </View>
 
         <View style={styles.rightSideContainer}>
-          <View style={styles.daysOfTheWeekContainer}>{daysOfTheWeek()}</View>
-          <View style={styles.calanderContainer}>{RenderCalander()}</View>
+          <View style={{ ...styles.daysOfTheWeekContainer, maxWidth: calanderBlockWidth() * 7 }}>{daysOfTheWeek()}</View>
+          <View style={{ ...styles.calanderContainer, maxWidth: calanderBlockWidth() * 7 }}>{RenderCalander()}</View>
         </View>
       </View>
 
