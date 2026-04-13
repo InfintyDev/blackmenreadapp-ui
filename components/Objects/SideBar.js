@@ -22,7 +22,7 @@ export default function SideBar() {
     ChagePageButton('User Info', 'UserInfo'),
     ChagePageButton('Past Logs', 'PastLogs'),
   ];
-  if (PhoneView) {
+  if (PhoneView()) {
     buttons = [
       ChagePageButtonImage("Home", viewStyle, require('../../assets/HomeIcon.png'), imageWidth, imageHeight, pressableStyle),
       ChagePageButtonImage("Calander", viewStyle, require('../../assets/CalanderIcon.png'), imageWidth, imageHeight, pressableStyle),
@@ -57,7 +57,7 @@ export function SideBarExclued() {
     ChagePageButton('User Info', 'UserInfo'),
     ChagePageButton('Past Logs', 'PastLogs'),
   ];
-  if (PhoneView) {
+  if (PhoneView()) {
     buttons = [
 
       ChagePageButtonImage("Calander", viewStyle, require('../../assets/HomeIcon.png'), imageWidth, imageHeight, pressableStyle),

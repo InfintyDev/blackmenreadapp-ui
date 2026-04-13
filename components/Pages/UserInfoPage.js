@@ -15,7 +15,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import User from '../InfoHolders/User';
 import SideBar from '../Objects/SideBar';
 import ChangePageButton from '../Objects/ChangePageButton';
-import { connectUserTo, saveUserDataLocaly } from '../../GetSaveUserFromServer';
+import { connectUserTo, saveUserDataLocaly, removeConnectedUser } from '../../GetSaveUserFromServer';
 import ChagePageButton from '../Objects/ChangePageButton';
 import saveUserToken from '../SaveLoadUserLocal';
 import MakeScroll from '../Objects/MakeScroll';
@@ -191,11 +191,36 @@ export default function UserInfoPage() {
   }
 
 
-  const removeConnectedAcount = (acount) => {
+  const removeConnectedAcountTest = (acount) => {
     setShowAcountManagmentPopup(false)
     console.log("Disconnect")
     console.log(acount)
   }
+  const removeConnectedAcount = (baseAcount, removeAcount) => {
+    setShowAcountManagmentPopup(false)
+    console.log("Disconnect")
+    console.log(baseAcount)
+
+    var baseAcountID = baseAcount['_id']
+    console.log("Id: " + baseAcountID)
+    var baseAcountEmail = baseAcount['Email']
+    console.log("Email: " + baseAcountEmail)
+    var baseAcountType = baseAcount['UserType']
+    console.log("Type: " + baseAcountType)
+
+    console.log(removeAcount)
+    var removeAcountID = removeAcount['id'];
+    console.log("Id Remove: " + removeAcountID)
+    //console.log("Id Remove: " + removeAcount['id'])
+    var removeAcountEmail = removeAcount['Email']
+    console.log("Email: " + removeAcountEmail)
+    var removeAcountType = "Student"
+    console.log("Type: " + removeAcountType)
+    removeConnectedUser(baseAcountEmail, baseAcountID, baseAcountType, removeAcountEmail, removeAcountID);
+
+
+  }
+
   const ManagementWindow = (acount) => {
     console.log(acount)
     return (<Modal visible={showAcountManagmentPopup} onRequestClose={() => setShowAcountManagmentPopup(false)} animationType="slide"
@@ -224,7 +249,7 @@ export default function UserInfoPage() {
             <Text>ID: {acount['id']}</Text>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => removeConnectedAcount(acount)}>
+              onPress={() => removeConnectedAcount(userAspects, acount)}>
               <Text>Disconnect Acount</Text>
             </Pressable>
           </View>

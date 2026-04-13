@@ -13,6 +13,7 @@ import Calendar from '../Objects/Calendar';
 import SideBar from '../Objects/SideBar';
 import MakeScroll from '../Objects/MakeScroll'
 import { fetchCalendar } from '../../GetSaveUserFromServer';
+import App, { PhoneView } from '../../App';
 
 
 
@@ -98,9 +99,18 @@ export default function CalanderPage() {
 
 
   interprateData()
-  const scale = 1.0;
+  var scale = 1.0;
+  var margen = 0;
+  if (PhoneView()) {
+    scale = 1.0;
+    margen = 0;
+  }
+  else {
+    scale = 1.2;
+    margen = 40;
+  }
   const CalandarWithEvents = <View>{Calendar(calenderData)}</View>
-  const CalandarWithEventsLarge = <View style={{ transform: [{ scale: scale }], marginTop: 0 }}>{Calendar(calenderData)}</View>
+  const CalandarWithEventsLarge = <View style={{ transform: [{ scale: scale }], marginTop: margen }}>{Calendar(calenderData)}</View>
 
 
   return (

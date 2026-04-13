@@ -16,10 +16,11 @@ import BookLog from '../InfoHolders/BookLog';
 import saveUserToken, { getUserToken } from '../SaveLoadUserLocal';
 
 import User, { StudentUser, TuterUser, ParentUser } from '../InfoHolders/User';
-import MakeScroll from '../Objects/MakeScroll';
+import MakeScroll, { MakeScrollHorizontal } from '../Objects/MakeScroll';
 import { Screen } from 'expo-router/build/views/Screen';
 import { Dimensions } from 'react-native';
 import { GetConnectedUser } from '../../GetSaveUserFromServer';
+import App, { PhoneView } from '../../App';
 
 
 
@@ -88,8 +89,12 @@ function GetTheLogLook(notes, summery, bookName, fristPage, lastPage, time, date
     'Reading Logged By ' + loggedUnderName,
     styles.paragraphRowFlexable
   );
+  var sty = styles.logView
+  if (PhoneView()) {
+    sty = { ...styles.logView, maxWidth: 300 };
+  }
   return (
-    <View style={styles.logView}>
+    <View style={sty}>
 
       <View>{logForBox}</View>
       <View>{loggedUnderBox}</View>
@@ -236,7 +241,7 @@ export default function PastLogsPage() {
     }}><Card style={styles.paddedCard}><Text>{students}</Text></Card>
 
       <View style={styles.containerColoum}>
-        {MakeScroll(<View style={styles.containerRow}>{userAspects['ConnectedAcounts'].map((connectedUser) => studentSelector(connectedUser))}</View>, heightFunction
+        {MakeScrollHorizontal(<View style={styles.containerRow}>{userAspects['ConnectedAcounts'].map((connectedUser) => studentSelector(connectedUser))}</View>, 200
         )}
       </View>
     </View>

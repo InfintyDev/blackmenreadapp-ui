@@ -81,13 +81,14 @@ export const PopUpBoxCalander = (
   return (
     <View style={{ ...styles.centeredView }}>
       <Modal
+        style={{ ...styles.centeredView }}
         animationType="slide"
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => setModalVisible(!modalVisible)}>
-        <View style={{ ...styles.centeredView, transform: [{ translateX: 100 }], }}>
+        <View style={{ ...styles.centeredView, }}>
 
-          <View style={{ ...styles.modalView }}>
+          <View style={{ ...styles.modalView, alignItems: 'center', justifyContent: 'center' }}>
 
             <View>
               <Text style={styles.centerer}>

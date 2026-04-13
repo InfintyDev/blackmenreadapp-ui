@@ -8,6 +8,7 @@ import {
   SafeAreaView,
   TextInput,
   Modal,
+  Pressable
 } from 'react-native';
 import styles from './Styles';
 
@@ -58,7 +59,7 @@ const Timer = () => {
     }
     return hours + ':' + minutes + ':' + seconds;
   };
-
+  /*
   return [
     <SafeAreaView style={styles.shrinkDown}>
       <View style={styles.timerView}>
@@ -78,6 +79,32 @@ const Timer = () => {
             title="Reset"
             style={styles.timerButton}
             onPress={() => resetTimer()}></Button>
+        </View>
+
+      </View>
+    </SafeAreaView>,
+    timerTime,
+  ];*/
+
+  return [
+    <SafeAreaView style={styles.shrinkDown}>
+      <View style={{ ...styles.timerView, margin: 0, maxHeight: "20%" }}>
+        <Text style={styles.timeDisplay}>Stopwatch</Text>
+        <Text style={styles.timeDisplay}>{displayTime(timerTime)}</Text>
+        <View style={styles.containerOfStuffRidged}>
+
+          {!timerActive && <Pressable
+            title="Start"
+            style={styles.timerButtonFixed}
+            onPress={() => startTimer()}><Text>Start</Text></Pressable>}
+          {timerActive && <Pressable
+            title="Pause"
+            style={styles.timerButtonFixed}
+            onPress={() => stopTimer()}><Text>Pause</Text></Pressable>}
+          <Pressable
+            title="Reset"
+            style={styles.timerButtonFixed}
+            onPress={() => resetTimer()}><Text>Reset</Text></Pressable>
         </View>
 
       </View>

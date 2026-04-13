@@ -52,6 +52,41 @@ export default function MakeScroll(content, inputheight = 200) {
   );
 }
 
+export function MakeScrollHorizontal(content, inputheight = 200) {
+
+
+  /*
+    const [window, setWindow] = useState(Dimensions.get('window'))
+    const [height, setHeight] = useState(0);
+    Dimensions.addEventListener('change', ({ window }) => {
+      setWindow(window)
+    });
+  
+    const sty = {
+      height: window.height
+    };
+    console.log("Height: " + inputheight)
+    */
+  return (
+
+
+
+
+    <ScrollView
+
+      style={{ width: inputheight }}
+      showsVerticalScrollIndicator={true}
+      horizontal={true}
+    >
+      <View>
+        {content}
+      </View>
+    </ScrollView>
+
+
+  );
+}
+
 const stylem = StyleSheet.create({
   container: {
     flex: 1,

@@ -36,12 +36,13 @@ import CreateAcountPage, { CreateParentAcountPage, CreateStudentAcountPage, Crea
 import PastLogsPage from './components/Pages/PastLogsPage'
 
 import LogInSelectorPage from './components/Pages/LogInSelectorPage.js';
+import { Screen } from 'expo-router/build/views/Screen.js';
 
 //import PageNotFound from './components/Pages/PageNotFound';
 
 //import PageNotFound from getImport('PageNotFound');
 
-//console.log(getImport('FrontPage'));
+console.log("test");
 
 //Key//cb3a5b0d-e691-46ee-afb1-18a8f45438b6
 
@@ -166,12 +167,23 @@ const Disp = () => {
 
 export default App;
 export const PhoneView = () => {
-  return true;
+  //return true;
+
+  if (Dimensions.get('window').width < 900) {
+    console.log("Phone Screen");
+    return true;
+  }
+  else {
+    console.log("Computer Screen");
+    return false;
+  }
 }
 export const AppName = () => {
   return 'http://localhost:8081/'
 }
 
 export const BackEndName = () => {
+
   return 'https://blackmenreadapp-api.onrender.com/'
+  //return 'http://localhost:5000/'
 }

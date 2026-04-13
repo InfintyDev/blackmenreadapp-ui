@@ -1,4 +1,4 @@
-import { Text, StyleSheet, View, Button } from 'react-native';
+import { Text, StyleSheet, View, Button, Pressable } from 'react-native';
 import { Card } from 'react-native-paper';
 import { useState } from 'react';
 import styles from './Styles';

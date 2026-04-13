@@ -21,7 +21,7 @@ import App, { PhoneView } from '../../App';
 
 const calanderBlockWidth = () => {
 
-  if (PhoneView) {
+  if (PhoneView()) {
     return (40)
   }
   else {
@@ -31,11 +31,11 @@ const calanderBlockWidth = () => {
 
 const calanderTextSize = () => {
 
-  if (PhoneView) {
+  if (PhoneView()) {
     return (10)
   }
   else {
-    return (20)
+    return (10)
   }
 }
 

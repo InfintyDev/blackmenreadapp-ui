@@ -28,7 +28,7 @@ import App, { PhoneView } from '../../App';
 
 const calanderBlockWidth = () => {
 
-  if (PhoneView) {
+  if (PhoneView()) {
     return (40)
   }
   else {

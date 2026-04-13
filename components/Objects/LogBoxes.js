@@ -30,6 +30,7 @@ import SideBar from '../Objects/SideBar';
 import saveUserToken from '../SaveLoadUserLocal';
 import { addUserLogs, GetConnectedUser } from '../../GetSaveUserFromServer'
 import App, { PhoneView } from '../../App';
+import MakeScroll from './MakeScroll.js';
 
 const LogBoxes = (time, userData = {}) => {
   //const [logInst, setLogInst] = useState();
@@ -152,7 +153,7 @@ const LogBoxes = (time, userData = {}) => {
       //console.log(objectList[i]);
     }
 
-    return reFormated;
+    return <View>{MakeScroll(reFormated, 35)}</View>;
   };
   const pressedPutton = (name) => {
     //alert(scr)
@@ -176,6 +177,7 @@ const LogBoxes = (time, userData = {}) => {
     return [
       <View style={styles.flexDefaltAbsolute}>
         <Button title={optionTitle} onPress={() => pressedPutton()} />
+
         {displayOptions && <View><Text>look</Text></View>}
         <View style={styles.flexDefaltAbsolute}>
           {displayOptions && ReformatObjectList(objectList)}
@@ -332,28 +334,16 @@ const LogBoxes = (time, userData = {}) => {
     //setLogInst(theLog);
 
 
-
     console.log(studentSelectorValue);
-
-
     console.log(theLog)
-
-
-
-
-
     if (studentSelectorValue['_id']) {
       var modifiedData = userData
-
       if (!modifiedData['Logs']) {
         //modifiedData['Logs'] = data['Logs']
-
         modifiedData['Logs'] = []
         console.log(modifiedData)
       }
       modifiedData['Logs'][modifiedData['Logs'].length] = theLog
-
-
       //console.log(modifiedData)
       saveUserToken(modifiedData)
       addUserLogs(userData['Email'], userData['_id'], userData['UserType'], theLog)
@@ -361,12 +351,6 @@ const LogBoxes = (time, userData = {}) => {
     else {
       addUserLogs(studentSelectorValue['Email'], studentSelectorValue['id'], 'Student', theLog)
     }
-
-
-
-
-
-
   };
 
   const autoLog = () => {
@@ -411,11 +395,11 @@ const LogBoxes = (time, userData = {}) => {
     return connectedUsers;
   }
   var styPhone = styles.containerRow;
-  if (PhoneView) {
+  if (PhoneView()) {
     styPhone = styles.containerColoum
   }
   return [
-    <View style={styles.logView}>
+    <View style={{ ...styles.logView }}>
       <View style={styles.containerColoum}>
         <View style={styles.logButton}>
           <Pressable
@@ -446,7 +430,7 @@ const LogBoxes = (time, userData = {}) => {
               <Text style={stylem.text}>Summery: </Text>
               <View>{summeryLogBox[0]}</View>
             </View>
-          </View> && !PhoneView}
+          </View> && !PhoneView()}
 
 
         <View style={styles.containerRow}>
@@ -494,6 +478,7 @@ const LogBoxes = (time, userData = {}) => {
           {userData['ConnectedAcounts'] &&
             useDropDown &&
             updateConnectedUsers()}</View>
+
       </View>
     </View>
   ];
