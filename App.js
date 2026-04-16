@@ -101,6 +101,12 @@ const RootStack = createNativeStackNavigator({
     }, PastLogs: {
       screen: PastLogsPage,
       options: { title: 'Back' },
+    }, Settings: {
+      screen: PastLogsPage,
+      options: { title: 'Back' },
+    }, StudentStatistics: {
+      screen: PastLogsPage,
+      options: { title: 'Back' },
     }
 
 

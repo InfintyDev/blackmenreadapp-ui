@@ -60,7 +60,7 @@ export default function FrontPage() {
     <View style={styles.containerRow}>
 
 
-      <SideBarExclued />
+      <SideBar />
       <View>
         {UpCommingEvents()}
 

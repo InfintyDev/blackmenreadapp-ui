@@ -60,11 +60,11 @@ export function SideBarExclued() {
   if (PhoneView()) {
     buttons = [
 
-      ChagePageButtonImage("Calander", viewStyle, require('../../assets/HomeIcon.png'), imageWidth, imageHeight, pressableStyle),
-      ChagePageButtonImage("Books", viewStyle, require('../../assets/HomeIcon.png'), imageWidth, imageHeight, pressableStyle),
-      ChagePageButtonImage("RecordTime", viewStyle, require('../../assets/HomeIcon.png'), imageWidth, imageHeight, pressableStyle),
+      ChagePageButtonImage("Calander", viewStyle, require('../../assets/CalanderIcon.png'), imageWidth, imageHeight, pressableStyle),
+      ChagePageButtonImage("Books", viewStyle, require('../../assets/BookIcon.png'), imageWidth, imageHeight, pressableStyle),
+      ChagePageButtonImage("RecordTime", viewStyle, require('../../assets/RecordTimeIcon.png'), imageWidth, imageHeight, pressableStyle),
       ChagePageButtonImage("UserInfo", viewStyle, require('../../assets/HomeIcon.png'), imageWidth, imageHeight, pressableStyle),
-      ChagePageButtonImage("PastLogs", viewStyle, require('../../assets/HomeIcon.png'), imageWidth, imageHeight, pressableStyle)
+      ChagePageButtonImage("PastLogs", viewStyle, require('../../assets/PastLogsIcon.png'), imageWidth, imageHeight, pressableStyle)
     ]
   }
 
