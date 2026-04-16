@@ -402,6 +402,27 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
   },
+
+  timerButtonFixed: {
+    margin: 12,
+
+    flex: 1,
+
+    flexDirection: 'column',
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 10,
+    alignItems: 'center',
+    shadowColor: '#000',
+    alignSelf: "center",
+
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+  },
   containerPlain: {
     flex: 5,
     margin: 0,
@@ -840,6 +861,12 @@ const styles = StyleSheet.create({
   centeredContainer: {
     flex: 1,
     backgroundColor: '#ecf0f1',
+    padding: 8,
+    justifyContent: 'center',
+  },
+  centeredContainerBlankBackGround: {
+    flex: 1,
+
     padding: 8,
     justifyContent: 'center',
   },

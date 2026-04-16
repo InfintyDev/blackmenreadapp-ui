@@ -23,7 +23,18 @@ import { PopUpBoxCalander } from './PopUp';
 
 import { CalendarDayProps, EventProps } from './CalanderTypes'
 import { Card } from 'react-native-paper';
+import App, { PhoneView } from '../../App';
 
+
+const calanderBlockWidth = () => {
+
+  if (PhoneView()) {
+    return (40)
+  }
+  else {
+    return (50)
+  }
+}
 // If you have custom components, import them:
 // import PopUpBox from "./PopUpBox";
 // import EventAdderInterface from "./EventAdderInterface";
@@ -59,7 +70,7 @@ export default class CalendarDay extends Component {
 
     this.fullDate = props['fullDate'];
     this.day = props['fullDate'].getDate();
-    this.sty = styles.calanderBlock;
+    this.sty = { ...styles.calanderBlock, maxWidth: calanderBlockWidth() };
     this.styEvents = styles.calanderBlockWithEvents;
     //const eventTest = ['a']
     this.state = {

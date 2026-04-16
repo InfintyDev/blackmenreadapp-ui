@@ -225,6 +225,39 @@ export const connectUserTo = async (connectToEmail = '', connectToId, ConnectToU
 };
 
 
+export const removeConnectedUser = async (connectToEmail = '', connectToId, ConnectToUsertype = '', removeEmail = '', removeId = '') => {
+  console.log('addLog')
+  try {
+    const response = await fetch(pathToWebSite + '/RemoveConnectedUser', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({
+        user: {
+          toEmail: connectToEmail,
+          toId: connectToId,
+          toUsertype: ConnectToUsertype,
+          removeEmail: removeEmail,
+          removeId: removeId
+
+        }
+      })
+    });
+
+
+    return await response.json();
+
+
+
+    // Handle successful response, e.g., navigate to a different screen
+  } catch (error) {
+    console.error('Error Logging in:', error);
+    // Handle error, e.g., display an error message to the user
+  }
+};
+
 export const GetConnectedUser = async (email = '', id, userType = '') => {
   console.log('getData')
   try {

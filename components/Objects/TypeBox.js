@@ -20,13 +20,14 @@ export default function InputBox(
   sideText,
   sty = styles.paragraphFlexable,
   textSty = styles.textStyle,
-  multi = true
+  multi = true,
+  inputSty = styles.flexDefalt
 ) {
   const [inputedValue, onChangeText] = useState('');
 
   const inputer = (
     <TextInput
-      style={styles.flexDefalt}
+      style={inputSty}
       value={inputedValue}
       onChangeText={(inputedValue) => onChangeText(inputedValue)
       }
@@ -85,11 +86,11 @@ export class InputBoxNumbersClass extends Component {
 }
 */
 export const InputBoxNumbers = (
-  def = '',
-  sideText,
+
   maxNumbers = 2,
   sty = styles.paragraphFlexable,
   textSty = styles.textStyle,
+  inputSty = { width: '100%', height: '100%' },
   multi = true
 ) => {
   const [inputedValue, onChangeText] = useState('');
@@ -100,7 +101,7 @@ export const InputBoxNumbers = (
     if (value != null) {
       stringWithoutLetters = value.replace(/[a-zA-Z]/g, '');
       if (stringWithoutLetters.length > maxNumbers) {
-        stringWithoutLetters.slice(0, maxLength - 3) + '...'; // Subtract 3 for the ellipsis
+        stringWithoutLetters = stringWithoutLetters.slice(0, maxNumbers); // Subtract 3 for the ellipsis
       }
       onChangeText(stringWithoutLetters);
     }
@@ -108,11 +109,11 @@ export const InputBoxNumbers = (
 
   const inputer = (
     <TextInput
-      style={styles.flexDefalt}
+      style={inputSty}
       value={inputedValue}
       onChangeText={(inputedValue) => ChangeValue(inputedValue)}
       multiline={multi}
-      numberOfLines={1} > </TextInput>
+    > </TextInput>
   );
 
   return [

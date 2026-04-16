@@ -16,15 +16,18 @@ import BookLog from '../InfoHolders/BookLog';
 import saveUserToken, { getUserToken } from '../SaveLoadUserLocal';
 
 import User, { StudentUser, TuterUser, ParentUser } from '../InfoHolders/User';
-import MakeScroll from '../Objects/MakeScroll';
+import MakeScroll, { MakeScrollHorizontal } from '../Objects/MakeScroll';
 import { Screen } from 'expo-router/build/views/Screen';
 import { Dimensions } from 'react-native';
 import { GetConnectedUser } from '../../GetSaveUserFromServer';
+import App, { PhoneView } from '../../App';
 
 
 
 
 function GetTheLogLook(notes, summery, bookName, fristPage, lastPage, time, date = new Date, studentName, loggedUnderName) {
+  //const [deleteLogButton, setDeleteLogButton] = useState(false)
+  var deleteLogButton = false;
   const displayTime = (time) => {
     const sec = parseInt(time, 10); // convert value to number if it's string
     let hours = Math.floor(sec / 3600); // get hours
@@ -88,17 +91,33 @@ function GetTheLogLook(notes, summery, bookName, fristPage, lastPage, time, date
     'Reading Logged By ' + loggedUnderName,
     styles.paragraphRowFlexable
   );
+  var sty = styles.logView
+  if (PhoneView()) {
+    sty = { ...styles.logView, maxWidth: 300 };
+  }
+  const changeDeleteLogButton = () => {
+    console.log("Show Delete Button")
+    deleteLogButton = true
+  }
   return (
-    <View style={styles.logView}>
+    <View style={sty}>
+      <View style={styles.cornerView}>
+        <View>
+          {<View><Button title='Delete'></Button></View> && deleteLogButton}
+          <Button title='...' onPress={() => changeDeleteLogButton()}></Button>
+        </View>
 
-      <View>{logForBox}</View>
-      <View>{loggedUnderBox}</View>
-      <View>{bookLogBox}</View>
-      <View>{notes != '' && notesLogBox}</View>
-      <View>{summery != '' && summeryLogBox}</View>
-      <View style={{ flexDirection: 'row', flexWrap: 'wrap', flex: 1, flexShrink: 1 }}>
-        <View>{timeBox}</View>
-        <View>{dateBox}</View>
+
+      </View>
+
+      <View style={styles.centerer}>{logForBox}</View>
+      <View style={styles.centerer}>{loggedUnderBox}</View>
+      <View style={styles.centerer}>{bookLogBox}</View>
+      <View style={styles.centerer}>{notes != '' && notesLogBox}</View>
+      <View style={styles.centerer}>{summery != '' && summeryLogBox}</View>
+      <View style={{ ...styles.centerer, flexDirection: 'row', flexWrap: 'wrap', flex: 1, flexShrink: 1 }}>
+        <View style={styles.centerer}>{timeBox}</View>
+        <View style={styles.centerer}>{dateBox}</View>
       </View>
 
 
@@ -236,7 +255,7 @@ export default function PastLogsPage() {
     }}><Card style={styles.paddedCard}><Text>{students}</Text></Card>
 
       <View style={styles.containerColoum}>
-        {MakeScroll(<View style={styles.containerColoum}>{userAspects['ConnectedAcounts'].map((connectedUser) => studentSelector(connectedUser))}</View>, heightFunction
+        {MakeScrollHorizontal(<View style={styles.containerRow}>{userAspects['ConnectedAcounts'].map((connectedUser) => studentSelector(connectedUser))}</View>, 200
         )}
       </View>
     </View>

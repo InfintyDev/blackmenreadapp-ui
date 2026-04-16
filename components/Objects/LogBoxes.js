@@ -8,6 +8,7 @@ import {
   Modal,
   Pressable,
   SafeAreaProvider,
+
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import styles from './Styles';
@@ -18,22 +19,25 @@ import TypeBox, {
   InputBoxNumbers,
   InputBoxNumbersClass,
 } from './TypeBox';
-
+import { Card } from 'react-native-paper';
 //import textfile from '../assets/BookLogsText.txt';
 import BookLog from '../InfoHolders/BookLog.js';
 import * as logj from '../../assets/Log.json';
 import User, { StudentUser } from '../InfoHolders/User';
 import UserHolder from '../InfoHolders/UserHolder';
 
-
+import SideBar from '../Objects/SideBar';
 import saveUserToken from '../SaveLoadUserLocal';
 import { addUserLogs, GetConnectedUser } from '../../GetSaveUserFromServer'
+import App, { PhoneView } from '../../App';
+import MakeScroll from './MakeScroll.js';
 
 const LogBoxes = (time, userData = {}) => {
   //const [logInst, setLogInst] = useState();
-  const notesLogBox = TypeBox('Notes');
-  const summeryLogBox = TypeBox('Summery');
-  const bookLogBox = TypeBox('Book', '', styles.paragraphFlexable);
+  const styView = styles.centeredContainerBlankBackGround;
+  const notesLogBox = TypeBox('Notes', '', styles.paragraphBox, styles.textStyle, true);
+  const summeryLogBox = TypeBox('Summery', '', styles.paragraphBox, styles.textStyle, true);
+  const bookLogBox = TypeBox('Book', '', styView, styles.textStyle, true, stylem.parBox);
 
 
 
@@ -43,14 +47,20 @@ const LogBoxes = (time, userData = {}) => {
 
   const pageFirstLogBox = InputBoxNumbers(
 
-    '',
-    styles.paragraphRowFlexable
+    4,
+    styles.centeredContainerBlankBackGround,
+    styles.textStyle,
+    stylem.parBox
+
 
 
   );
   const pageLastLogBox = InputBoxNumbers(
-    '',
-    styles.paragraphRowFlexable
+    4,
+    styles.centeredContainerBlankBackGround,
+    styles.textStyle,
+    stylem.parBox
+
 
 
   );
@@ -143,7 +153,7 @@ const LogBoxes = (time, userData = {}) => {
       //console.log(objectList[i]);
     }
 
-    return reFormated;
+    return <View>{MakeScroll(reFormated, 35)}</View>;
   };
   const pressedPutton = (name) => {
     //alert(scr)
@@ -167,6 +177,7 @@ const LogBoxes = (time, userData = {}) => {
     return [
       <View style={styles.flexDefaltAbsolute}>
         <Button title={optionTitle} onPress={() => pressedPutton()} />
+
         {displayOptions && <View><Text>look</Text></View>}
         <View style={styles.flexDefaltAbsolute}>
           {displayOptions && ReformatObjectList(objectList)}
@@ -323,28 +334,16 @@ const LogBoxes = (time, userData = {}) => {
     //setLogInst(theLog);
 
 
-
     console.log(studentSelectorValue);
-
-
     console.log(theLog)
-
-
-
-
-
     if (studentSelectorValue['_id']) {
       var modifiedData = userData
-
       if (!modifiedData['Logs']) {
         //modifiedData['Logs'] = data['Logs']
-
         modifiedData['Logs'] = []
         console.log(modifiedData)
       }
       modifiedData['Logs'][modifiedData['Logs'].length] = theLog
-
-
       //console.log(modifiedData)
       saveUserToken(modifiedData)
       addUserLogs(userData['Email'], userData['_id'], userData['UserType'], theLog)
@@ -352,12 +351,6 @@ const LogBoxes = (time, userData = {}) => {
     else {
       addUserLogs(studentSelectorValue['Email'], studentSelectorValue['id'], 'Student', theLog)
     }
-
-
-
-
-
-
   };
 
   const autoLog = () => {
@@ -401,6 +394,94 @@ const LogBoxes = (time, userData = {}) => {
     }
     return connectedUsers;
   }
+  var styPhone = styles.containerRow;
+  if (PhoneView()) {
+    styPhone = styles.containerColoum
+  }
+  return [
+    <View style={{ ...styles.logView }}>
+      <View style={styles.containerColoum}>
+        <View style={styles.logButton}>
+          <Pressable
+
+            onPress={() => LogButtonPressed()}><Card style={styles.paddedCard}><Text>Log Time</Text></Card></Pressable>
+        </View>
+        <View style={{ ...styPhone, flex: 1, flexWrap: 'wrap' }}>
+          <View style={styles.containerRow}>
+            <Text style={styles.tinyText}>Book: </Text>
+            <View>{bookLogBox[0]}</View>
+          </View>
+          <View style={styles.containerRow}>
+            <Text style={styles.tinyText}>First Page: </Text>
+            <View>{pageFirstLogBox[0]}</View>
+          </View>
+          <View style={styles.containerRow}>
+            <Text style={styles.tinyText}>Last Page: </Text>
+            <View >{pageLastLogBox[0]}</View>
+          </View>
+        </View>
+        {
+          <View style={{ ...styles.containerRow, flex: 1 }}>
+            <View style={styles.containerRow}>
+              <Text style={stylem.text}>Notes: </Text>
+              <View>{notesLogBox[0]}</View>
+            </View>
+            <View style={styles.containerRow}>
+              <Text style={stylem.text}>Summery: </Text>
+              <View>{summeryLogBox[0]}</View>
+            </View>
+          </View> && !PhoneView()}
+
+
+        <View style={styles.containerRow}>
+          <Button title={'Auto Log'} onPress={() => autoLog()} />
+          <View style={styles.containerColoum}>
+            <Text style={styles.minuteText}>HRS: </Text>
+
+            <View style={styles.paragraphFlexable}>
+              <TextInput
+                defaultValue={'00'}
+                onChangeText={(val) => ChangeValueHrs(val)}
+                style={styles.flexDefalt}
+                maxLength={2}
+                value={hoursValue}
+              />
+            </View>
+          </View>
+          <View style={styles.containerColoum}>
+            <Text style={styles.minuteText}>MIN: </Text>
+
+            <View style={styles.paragraphFlexable}>
+              <TextInput
+                defaultValue={'00'}
+                onChangeText={(val) => ChangeValueMin(val)}
+                style={styles.flexDefalt}
+                maxLength={2}
+                value={minutesValue}
+              />
+            </View>
+          </View>
+          <View style={styles.containerColoum}>
+            <Text style={styles.minuteText}>SEC: </Text>
+            <View style={styles.paragraphFlexable}>
+              <TextInput
+                defaultValue={'00'}
+                onChangeText={(val) => ChangeValueSec(val)}
+                style={styles.flexDefalt}
+                maxLength={2}
+                value={secondsValue}
+              />
+            </View>
+          </View>
+        </View>
+        <View style={styles.containerRowAbove}>{userData['UserName'] && !useDropDown && updateUserBox()}
+          {userData['ConnectedAcounts'] &&
+            useDropDown &&
+            updateConnectedUsers()}</View>
+
+      </View>
+    </View>
+  ];
   return [
     <View style={styles.logView}>
       <View style={styles.containerColoum}>
@@ -481,4 +562,65 @@ const LogBoxes = (time, userData = {}) => {
     </View>
   ];
 };
+
+
+const stylem = StyleSheet.create({
+
+  paragraphRowFlexable: {
+    backgroundColor: 'lightgray',
+    flex: 1,
+
+    flexDirection: 'row',
+    margin: 3,
+    minHeight: 10,
+    borderRadius: 5,
+    width: '100%', borderRadius: 10,
+    borderColor: '#6b6a6f',
+    borderWidth: 3,
+    //flex: 1,
+    //backgroundColor: '#ecf0f1',
+    padding: 8,
+    justifyContent: 'center',
+  },
+  text: {
+    fontSize: 42,
+    padding: 12,
+  },
+
+  parBox: {
+    backgroundColor: 'lightgray',
+    //flex: 1,
+
+
+    //flexDirection: 'row',
+    margin: 5,
+    padding: 2.5,
+    fontSize: 10,
+    fontWeight: 'bold',
+    borderRadius: 10,
+    borderColor: '#6b6a6f',
+    borderWidth: 3,
+    alignItems: "center",
+    alignSelf: "center",
+    verticalAlign: "middle"
+    //objectFit:'scale-down',
+    //textAlign: 'center',
+    //flexWrap:'nowrap',
+    //textAlignVertical:'auto',
+  },
+  text: {
+    //flex: 0.5,
+    //flexShrink: 4,
+    //backgroundColor: 'orange',
+    //width:'100%',
+
+    //flexDirection:'row',
+    margin: 5,
+    fontSize: 12,
+
+    fontWeight: 'bold',
+    alignSelf: 'center',
+  }
+});
+
 export default LogBoxes
