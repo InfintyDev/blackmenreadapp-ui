@@ -27,7 +27,7 @@ import App, { PhoneView } from '../../App';
 
 function GetTheLogLook(notes, summery, bookName, fristPage, lastPage, time, date = new Date, studentName, loggedUnderName) {
   //const [deleteLogButton, setDeleteLogButton] = useState(false)
-  var deleteLogButton = false;
+
   const displayTime = (time) => {
     const sec = parseInt(time, 10); // convert value to number if it's string
     let hours = Math.floor(sec / 3600); // get hours
@@ -95,15 +95,18 @@ function GetTheLogLook(notes, summery, bookName, fristPage, lastPage, time, date
   if (PhoneView()) {
     sty = { ...styles.logView, maxWidth: 300 };
   }
+  var deleteLogButton = true;
+  //const [deleteLogButton, setDeleteLogButton] = useState(false)
   const changeDeleteLogButton = () => {
     console.log("Show Delete Button")
     deleteLogButton = true
   }
+
   return (
     <View style={sty}>
       <View style={styles.cornerView}>
-        <View>
-          {<View><Button title='Delete'></Button></View> && deleteLogButton}
+        <View style={styles.containerRow}>
+          {deleteLogButton && <View><Button title='Delete'></Button></View>}
           <Button title='...' onPress={() => changeDeleteLogButton()}></Button>
         </View>
 

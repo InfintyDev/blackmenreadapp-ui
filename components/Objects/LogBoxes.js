@@ -404,7 +404,7 @@ const LogBoxes = (time, userData = {}) => {
         <View style={styles.logButton}>
           <Pressable
 
-            onPress={() => LogButtonPressed()}><Card style={styles.paddedCard}><Text>Log Time</Text></Card></Pressable>
+            onPress={() => LogButtonPressed()}><Card style={{ ...styles.paddedCard, margin: 5, backgroundColor: "#ffc20f" }}><Text>Log Time</Text></Card></Pressable>
         </View>
         <View style={{ ...styPhone, flex: 1, flexWrap: 'wrap' }}>
           <View style={styles.containerRow}>
@@ -434,8 +434,17 @@ const LogBoxes = (time, userData = {}) => {
 
 
         <View style={styles.containerRow}>
-          <Button title={'Auto Log'} onPress={() => autoLog()} />
-          <View style={styles.containerColoum}>
+          <View style={styles.centeredContainerBlankBackGround}>
+            <Pressable onPress={() => autoLog()} >
+              <Card style={{ ...styles.paddedCard, backgroundColor: "#ffc20f", margin: 3 }}>
+                <Text>Auto Log</Text>
+              </Card>
+
+            </Pressable>
+          </View>
+
+          <Card style={{ ...styles.containerColoum, backgroundColor: "#ffc20f", margin: 3 }}>
+
             <Text style={styles.minuteText}>HRS: </Text>
 
             <View style={styles.paragraphFlexable}>
@@ -447,8 +456,10 @@ const LogBoxes = (time, userData = {}) => {
                 value={hoursValue}
               />
             </View>
-          </View>
-          <View style={styles.containerColoum}>
+          </Card>
+
+
+          <Card style={{ ...styles.containerColoum, backgroundColor: "#ffc20f", margin: 3 }}>
             <Text style={styles.minuteText}>MIN: </Text>
 
             <View style={styles.paragraphFlexable}>
@@ -460,8 +471,8 @@ const LogBoxes = (time, userData = {}) => {
                 value={minutesValue}
               />
             </View>
-          </View>
-          <View style={styles.containerColoum}>
+          </Card>
+          <Card style={{ ...styles.containerColoum, backgroundColor: "#ffc20f", margin: 3 }}>
             <Text style={styles.minuteText}>SEC: </Text>
             <View style={styles.paragraphFlexable}>
               <TextInput
@@ -472,7 +483,7 @@ const LogBoxes = (time, userData = {}) => {
                 value={secondsValue}
               />
             </View>
-          </View>
+          </Card>
         </View>
         <View style={styles.containerRowAbove}>{userData['UserName'] && !useDropDown && updateUserBox()}
           {userData['ConnectedAcounts'] &&
