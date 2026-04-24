@@ -122,11 +122,11 @@ export function ChagePageButtonImage(
   };
 
   return (
-    <View style={{ ...viewStyle, maxHeight: imageHeight, maxWidth: imageWidth }}>
+    <View style={{ ...viewStyle, maxHeight: imageHeight, maxWidth: imageWidth, backgroundColor: "white" }}>
       <Pressable
 
         onPress={() => pressedPutton(pageName)}
-        style={{ ...pressableStyle, minHeight: imageHeight, minWidth: imageWidth }}>
+        style={{ ...pressableStyle, minHeight: imageHeight, minWidth: imageWidth, backgroundColor: "white" }}>
         {MakeImage(imageStyle, imageSource, imageWidth, imageHeight)}
       </Pressable>
     </View>

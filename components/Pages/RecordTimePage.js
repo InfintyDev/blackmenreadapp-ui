@@ -58,7 +58,7 @@ export default function RecordTimePage() {
         <SafeAreaView style={styles.containerRow}>
           <SideBar />
           <View style={{ ...styles.containerColoum, flex: 1 }}>
-            <View style={{ transform: [{ scale: .9 }], flex: 1 }}>{stopWatch[0]}</View>
+            <View style={{ transform: [{ scale: .875 }], flex: .9 }}>{stopWatch[0]}</View>
             <View style={{ transform: [{ scale: .9, }], flex: 2 }}>{theLogBox[0]}</View>
           </View>
         </SafeAreaView>

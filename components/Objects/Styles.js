@@ -582,6 +582,20 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     alignSelf: 'center',
   },
+
+  tinyTextChart: {
+
+
+    //backgroundColor: 'orange',
+    //width:'100%',
+
+    //flexDirection:'row',
+
+    fontSize: 10,
+
+    fontWeight: 'bold',
+    alignSelf: 'center',
+  },
   tinyTextLogReview: {
 
 
@@ -670,6 +684,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#ecf0f1',
   },
+  containerNoFlex: {
+    //flexWrap:'wrap',
+
+    backgroundColor: '#ecf0f1',
+  },
   containerBackGround: {
     //flexWrap:'wrap',
 
@@ -708,6 +727,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+
   cornerView: {
     flex: 1,
     alignContent: 'flex-end',
@@ -831,6 +851,7 @@ const styles = StyleSheet.create({
   scaledContainer: {
     transform: [{ scale: 1 }],
   },
+
   box: {
     height: 150,
     width: 150,

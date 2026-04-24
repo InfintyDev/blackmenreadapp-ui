@@ -37,6 +37,8 @@ import PastLogsPage from './components/Pages/PastLogsPage'
 
 import LogInSelectorPage from './components/Pages/LogInSelectorPage.js';
 import { Screen } from 'expo-router/build/views/Screen.js';
+import SettingsPage from './components/Pages/SettingsPage.js';
+import StudentStatisticsPage from './components/Pages/StudentStatisticsPage.js';
 
 //import PageNotFound from './components/Pages/PageNotFound';
 
@@ -102,10 +104,10 @@ const RootStack = createNativeStackNavigator({
       screen: PastLogsPage,
       options: { title: 'Back' },
     }, Settings: {
-      screen: PastLogsPage,
+      screen: SettingsPage,
       options: { title: 'Back' },
     }, StudentStatistics: {
-      screen: PastLogsPage,
+      screen: StudentStatisticsPage,
       options: { title: 'Back' },
     }
 
@@ -139,7 +141,7 @@ const AppWebs = () => {
       <Route path="/MakeParentAcountPage" element={CreateParentAcountPage()} />
       <Route path="/MakeStudentAcountPage" element={CreateStudentAcountPage()} />
       <Route path="/PastLogs" element={PastLogsPage()} />
-
+      <Route path="/Settings" element={SettingsPage()} />
     </Routes>
   </Router>);
 }
