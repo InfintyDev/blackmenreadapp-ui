@@ -7,20 +7,12 @@ import {
     Image,
     Pressable
 } from 'react-native';
-import { useState } from 'react';
-import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context'
 
-// You can import supported modules from npm
-import { Card } from 'react-native-paper';
 
 // or any files within the Snack
 
 import styles from '../Objects/Styles';
-import ScreenSelector from '../Objects/SceneSelector';
-import TypeBox from '../Objects/TypeBox';
-import SignInBox from '../Objects/SignInBox';
-import User from '../InfoHolders/User';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import ChagePageButton from '../Objects/ChangePageButton';
 
 

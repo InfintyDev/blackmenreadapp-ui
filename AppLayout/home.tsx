@@ -1,14 +1,13 @@
-import { Text, SafeAreaView, StyleSheet } from 'react-native';
+import { Text, StyleSheet, View } from 'react-native';
 import FrontPage from '../components/Pages/FrontPage.js'
 
-export default function HomePage()
-{
+export default function HomePage() {
 
-  return( 
-    <SafeAreaView>
-    {FrontPage()}
-    </SafeAreaView>
-    
+  return (
+    <View>
+      {FrontPage()}
+    </View>
+
 
   );
 

@@ -24,7 +24,8 @@
         "foregroundImage": "./assets/BlackMenReadLogo.jpg",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.anonymous.snackf68843ee820146848c280e8d37ea286c"
     },
     "web": {
       "favicon": "./assets/BlackMenReadLogo.jpg",
