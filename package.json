@@ -2,8 +2,8 @@
   "main": "./index.js",
   "scripts": {
     "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
     "web": "expo start --web",
     "lint": "expo lint"
   },
@@ -12,7 +12,7 @@
     "@react-native-async-storage/async-storage": "2.2.0",
     "@react-navigation/native": "^7.1.8",
     "@react-navigation/native-stack": "7.6.2",
-    "axios": "1.13.2",
+    "axios": "1.15.2",
     "expo": "~54.0.27",
     "expo-asset": "~12.0.11",
     "expo-file-system": "~19.0.21",
@@ -28,6 +28,7 @@
     "react-native-fs": "~2.20.0",
     "react-native-gifted-charts": "^1.4.76",
     "react-native-linear-gradient": "^2.8.3",
+    "react-native-orientation-locker": "^1.7.0",
     "react-native-paper": "4.9.2",
     "react-native-safe-area-context": "~5.6.0",
     "react-native-screens": "~4.16.0",
@@ -46,5 +47,7 @@
     "eslint-config-expo": "~10.0.0",
     "typescript": "~5.9.3"
   },
-  "private": true
+  "private": true,
+  "name": "bmr_mvp",
+  "version": "1.0.0"
 }

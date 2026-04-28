@@ -5,7 +5,7 @@ import {
   Image,
   Button,
   LogBox,
-  SafeAreaView,
+
   TextInput,
   Modal,
   Pressable,

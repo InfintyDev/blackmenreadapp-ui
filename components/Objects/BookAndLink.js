@@ -23,7 +23,7 @@ import { React } from 'react';
 
 import { Router, Link } from 'expo-router';
 
-import { useNavigation } from '@react-navigation/native';
+
 // or any files within the Snack
 
 function MakeImage(imageStyle, imageSource) {

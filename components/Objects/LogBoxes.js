@@ -22,7 +22,7 @@ import TypeBox, {
 import { Card } from 'react-native-paper';
 //import textfile from '../assets/BookLogsText.txt';
 import BookLog from '../InfoHolders/BookLog.js';
-import * as logj from '../../assets/Log.json';
+
 import User, { StudentUser } from '../InfoHolders/User';
 import UserHolder from '../InfoHolders/UserHolder';
 

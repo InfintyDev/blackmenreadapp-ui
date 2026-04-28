@@ -10,18 +10,14 @@ import {
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 // You can import supported modules from npm
 import { Card } from 'react-native-paper';
-import * as Papa from 'papaparse';
-// or any files within the Snack
-import BookWithLink from '../Objects/BookAndLink';
 
-import SideBar from '../Objects/SideBar';
 import styles from '../Objects/Styles';
 
 //import axios from 'axios';
 
 import getCSV from '../../GetFile';
 import { fetchBookRecomendations, getLocalBookRec } from '../../GetSaveUserFromServer';
-//import { GoogleSignin } from 'react-native-google-signin';
+
 import React, {
     useState,
     data,

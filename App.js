@@ -5,9 +5,9 @@ import { Stack, Link, Navigator } from 'expo-router';
 // or any files within the Snack 
 
 import FrontPage from './components/Pages/FrontPage.js';
+import Orientation from 'react-native-orientation-locker';
 
-
-import React, { useState, act, lazy } from 'react';
+import React, { useEffect } from 'react';
 
 
 import {
@@ -36,7 +36,6 @@ import CreateAcountPage, { CreateParentAcountPage, CreateStudentAcountPage, Crea
 import PastLogsPage from './components/Pages/PastLogsPage'
 
 import LogInSelectorPage from './components/Pages/LogInSelectorPage.js';
-import { Screen } from 'expo-router/build/views/Screen.js';
 import SettingsPage from './components/Pages/SettingsPage.js';
 import StudentStatisticsPage from './components/Pages/StudentStatisticsPage.js';
 
@@ -120,7 +119,8 @@ const Navigation = createStaticNavigation(RootStack);
 
 
 
-const App = () => {
+const AppT = () => {
+
   return <Navigation />;
 }
 const AppWebs = () => {
@@ -172,8 +172,16 @@ const Disp = () => {
 };
 */
 
-
-export default App;
+export default function App() {
+  useEffect(() => {
+    Orientation.lockToPortrait(); // Lock when screen mounts
+    return () => {
+      Orientation.unlockAllOrientations(); // Unlock when leaving
+    };
+  }, []);
+  return <Navigation />;
+}
+//export default App;
 export const PhoneView = () => {
   //return true;
 

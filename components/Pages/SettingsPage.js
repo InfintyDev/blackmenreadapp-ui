@@ -27,7 +27,7 @@ export default function SettingsPage() {
   const [shouldSetUserAspects, setShouldSetUserAspects] = useState(true);
   const [showAddAcountPopup, setShowAddAcountPopup] = useState(false)
   const [showAcountManagmentPopup, setShowAcountManagmentPopup] = useState(false)
-
+  const [confirmPopup, setConfirmPopup] = useState(false);
   const [addUserInputEmail, setAddUserInputEmail] = useState('')
   const [addUserInputUserId, setAddUserInputUserId] = useState('')
   const [connectUserType, setConnectUserType] = useState('')
@@ -92,10 +92,13 @@ export default function SettingsPage() {
           <Card style={styles.paddedCard}>
             <Text>Settings</Text>
           </Card>
+          {
+            <Pressable onPress={() => { setConfirmPopup(true) }}>
+              <Card style={styles.paddedCard}>
+                <Text>Delete Acount</Text>
+              </Card>
+            </Pressable> && false}
 
-          <Card style={styles.paddedCard}>
-            <Text>Delete Acount</Text>
-          </Card>
 
           <Card style={styles.paddedCard}>
             <Text>User Id: {userAspects['_id']}</Text>

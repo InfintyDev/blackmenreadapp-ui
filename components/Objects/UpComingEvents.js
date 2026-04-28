@@ -1,18 +1,13 @@
 import { Text, SafeAreaView, StyleSheet, View, Button } from 'react-native';
 import { useState } from 'react';
 
-// You can import supported modules from npm
+
 import { Card } from 'react-native-paper';
 
 // or any files within the Snack
 
 import styles from '../Objects/Styles';
-import ScreenSelector from '../Objects/SceneSelector';
-import Calandar from '../Objects/Calendar';
-import Timer from '../Objects/Timer';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import SideBar from '../Objects/SideBar';
-import TestObject from '../Objects/TestObject';
+
 import { fetchCalendar } from '../../GetSaveUserFromServer';
 import User from '../InfoHolders/User';
 
