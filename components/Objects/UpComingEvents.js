@@ -165,7 +165,7 @@ const UpCommingEvents = () => {
   return (
     <View style={styles.centerer}>
       <Card style={styles.paddedCard}>
-        <Text style={{ ...styles.largeText, justifyContent: 'center', alignItems: 'center' }}>Upcomming Events</Text>
+        <Text style={{ ...styles.largeText, justifyContent: 'center', alignItems: 'center' }}>Upcoming Events</Text>
 
         <View style={styles.centeredView}>
 

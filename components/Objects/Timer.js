@@ -87,8 +87,8 @@ const Timer = () => {
   ];*/
 
   return [
-    <SafeAreaView style={styles.shrinkDown}>
-      <View style={{ ...styles.timerView, margin: 0, maxHeight: "20%" }}>
+    <View style={styles.shrinkDown}>
+      <View style={{ ...styles.timerView, margin: 0, maxHeight: "50%" }}>
         <Text style={styles.timeDisplay}>Stopwatch</Text>
         <Text style={styles.timeDisplay}>{displayTime(timerTime)}</Text>
         <View style={styles.containerOfStuffRidged}>
@@ -108,7 +108,7 @@ const Timer = () => {
         </View>
 
       </View>
-    </SafeAreaView>,
+    </View>,
     timerTime,
   ];
 };

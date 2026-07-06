@@ -38,12 +38,13 @@ const LogBoxes = (time, userData = {}) => {
   const notesLogBox = TypeBox('Notes', '', styles.paragraphBox, styles.textStyle, true);
   const summeryLogBox = TypeBox('Summery', '', styles.paragraphBox, styles.textStyle, true);
   const bookLogBox = TypeBox('Book', '', styView, styles.textStyle, true, stylem.parBox);
-
-
+  const [invalidLog, setInvalidLog] = useState(false)
+  const [logError, setLogError] = useState("");
 
   const [secondsValue, setSecondsValue] = useState('0');
   const [minutesValue, setMinutesValue] = useState('0');
   const [hoursValue, setHoursValue] = useState('0');
+
 
   const pageFirstLogBox = InputBoxNumbers(
 
@@ -175,7 +176,7 @@ const LogBoxes = (time, userData = {}) => {
 
 
     return [
-      <View style={styles.flexDefaltAbsolute}>
+      <View style={{ ...styles.flexDefaltAbsolute, top: 2 }}>
         <Button title={optionTitle} onPress={() => pressedPutton()} />
 
         {displayOptions && <View><Text>look</Text></View>}
@@ -284,7 +285,39 @@ const LogBoxes = (time, userData = {}) => {
   };
 
   const LogButtonPressed = () => {
+
+    var invalidTimeBool = parseInt(hoursValue) == 0 && parseInt(minutesValue) == 0 && parseInt(secondsValue) == 0;
+    var invalidLogBool = bookLogBox[1] == "" || pageFirstLogBox[1] == "" || pageLastLogBox[1] == "" || invalidTimeBool;
+
+
     console.log('pressed');
+    console.log(bookLogBox[1])
+    console.log(pageFirstLogBox[1])
+    console.log(pageFirstLogBox[1])
+    if (invalidLogBool) {
+      console.log("Invalid")
+      setInvalidLog(true);
+      var toSetLogError = "";
+      if (bookLogBox[1] == "") {
+        toSetLogError = "Please put a book name"
+      }
+      if (pageFirstLogBox[1] == "") {
+        toSetLogError = toSetLogError + ":Please put a First Page"
+      }
+      if (pageLastLogBox[1] == "") {
+        toSetLogError = toSetLogError + ":Please put a Last Page"
+      }
+      if (invalidTimeBool) {
+        toSetLogError = toSetLogError + ":Please put a Time"
+      }
+      setLogError(toSetLogError)
+
+
+
+    }
+    else {
+      setInvalidLog(false);
+    }
 
     if (
       studentSelectorValue != null &&
@@ -334,23 +367,39 @@ const LogBoxes = (time, userData = {}) => {
     //setLogInst(theLog);
 
 
-    console.log(studentSelectorValue);
-    console.log(theLog)
-    if (studentSelectorValue['_id']) {
-      var modifiedData = userData
-      if (!modifiedData['Logs']) {
-        //modifiedData['Logs'] = data['Logs']
-        modifiedData['Logs'] = []
-        console.log(modifiedData)
-      }
-      modifiedData['Logs'][modifiedData['Logs'].length] = theLog
-      //console.log(modifiedData)
-      saveUserToken(modifiedData)
-      addUserLogs(userData['Email'], userData['_id'], userData['UserType'], theLog)
+    if (invalidLogBool) {
+      console.log("Invalid")
+      setInvalidLog(true);
     }
     else {
-      addUserLogs(studentSelectorValue['Email'], studentSelectorValue['id'], 'Student', theLog)
+
+      console.log(studentSelectorValue);
+      console.log(theLog)
+      if (studentSelectorValue['_id']) {
+        var modifiedData = userData
+        if (!modifiedData['Logs']) {
+          //modifiedData['Logs'] = data['Logs']
+          modifiedData['Logs'] = []
+          console.log(modifiedData)
+        }
+        modifiedData['Logs'][modifiedData['Logs'].length] = theLog
+        //console.log(modifiedData)
+        saveUserToken(modifiedData)
+        //clearLogBoxes()
+        addUserLogs(userData['Email'], userData['_id'], userData['UserType'], theLog)
+      }
+      else {
+        //clearLogBoxes()
+        addUserLogs(studentSelectorValue['Email'], studentSelectorValue['id'], 'Student', theLog)
+
+      }
+
+      clearLogBoxes()
     }
+
+
+
+
   };
 
   const autoLog = () => {
@@ -377,6 +426,11 @@ const LogBoxes = (time, userData = {}) => {
     console.log('Update')
   }
 
+  const clearLogBoxes = () => {
+    ChangeValueHrs('0')
+    ChangeValueMin('0')
+    ChangeValueSec('0')
+  }
   const updateConnectedUsers = () => {
     if (!connectedUsersGotten && userData['ConnectedAcounts'] && useDropDown || displayOptions != prevOption) {
       console.log('updated')
@@ -401,6 +455,7 @@ const LogBoxes = (time, userData = {}) => {
   return [
     <View style={{ ...styles.logView }}>
       <View style={styles.containerColoum}>
+
         <View style={styles.logButton}>
           <Pressable
 
@@ -485,7 +540,8 @@ const LogBoxes = (time, userData = {}) => {
             </View>
           </Card>
         </View>
-        <View style={styles.containerRowAbove}>{userData['UserName'] && !useDropDown && updateUserBox()}
+        {invalidLog && <Card style={{ ...styles.centeredContainer, padding: 2 }}>{invalidLog && <Text style={{ ...styles.tinyText, fontSize: 10 }}>Invalid Log: {logError}</Text>}</Card>}
+        <View style={styles.container}>{userData['UserName'] && !useDropDown && updateUserBox()}
           {userData['ConnectedAcounts'] &&
             useDropDown &&
             updateConnectedUsers()}</View>

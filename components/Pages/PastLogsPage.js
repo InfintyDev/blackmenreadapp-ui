@@ -189,7 +189,7 @@ export default function PastLogsPage() {
       const studentLogs = <View style={{ flex: 3 }}>{MakeScroll(await data['Logs'].map((log) => GetTheLogLook(log['Notes'], log['Summery'],
         log['Book'], log['PageFirst'], log['PageLast'],
         log['Time'], log['Date'], log['LoggedForName'],
-        log['LoggedUnderName']))
+        log['LoggedUnderName'])).reverse()
         , window.height - height)}</View>
 
       setSeeConnectedUserLogs(true)
@@ -284,7 +284,7 @@ export default function PastLogsPage() {
 
         {userAspects['UserType'] == 'Student' && MakeScroll(
           userAspects['Logs'] &&
-          userAspects['Logs'].map((log) => GetTheLogLook(log['Notes'], log['Summery'], log['Book'], log['PageFirst'], log['PageLast'], log['Time'], log['Date'], log['LoggedForName'], log['LoggedUnderName']))
+          userAspects['Logs'].map((log) => GetTheLogLook(log['Notes'], log['Summery'], log['Book'], log['PageFirst'], log['PageLast'], log['Time'], log['Date'], log['LoggedForName'], log['LoggedUnderName'])).reverse()
           , heightFunction
         )}
 

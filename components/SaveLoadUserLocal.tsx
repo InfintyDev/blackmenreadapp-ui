@@ -16,10 +16,10 @@ export const saveUserToken = async (token: User) => {
   try {
     const jsonValue = JSON.stringify(token);
     await AsyncStorage.setItem('userToken', jsonValue);
-    console.log('stored ' + jsonValue);
+    //console.log('stored ' + jsonValue);
   } catch (error) {
-    console.log('falure');
-    console.log(error);
+    //console.log('falure');
+    //console.log(error);
   }
 };
 
