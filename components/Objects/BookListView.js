@@ -13,11 +13,6 @@ import { Card } from 'react-native-paper';
 
 import styles from '../Objects/Styles';
 
-//import axios from 'axios';
-
-import getCSV from '../../GetFile';
-import { fetchBookRecomendations, getLocalBookRec } from '../../GetSaveUserFromServer';
-
 import React, {
     useState,
     data,

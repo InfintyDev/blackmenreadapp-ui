@@ -17,7 +17,11 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "Black-Men-Read",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -30,6 +34,11 @@
     "web": {
       "favicon": "./assets/BlackMenReadLogo.jpg",
       "startUrl": ""
+    },
+    "extra": {
+      "eas": {
+        "projectId": "cfcca488-66f2-459a-974a-b2d51487b5f9"
+      }
     }
   }
 }

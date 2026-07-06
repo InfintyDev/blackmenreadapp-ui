@@ -263,13 +263,9 @@ const styles = StyleSheet.create({
   },
 
   timerView: {
+    flexDirection: "column",
     margin: 20,
     flex: 1,
-    flexShrink: 1,
-    //maxWidth: '40%',
-    //minWidth: 160,
-    maxHeight: '30%',
-    scale: 1,
     backgroundColor: 'white',
     borderRadius: 20,
     padding: 10,
@@ -281,8 +277,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 4,
-
-    aspectRatio: 2,
   },
   logView: {
     //objectFit:'scale-down',
