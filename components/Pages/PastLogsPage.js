@@ -76,7 +76,7 @@ function GetTheLogLook(notes, summery, bookName, fristPage, lastPage, time, date
   );
 
   const timeBox = DisplayBox(
-    'Time Read: ' + displayTime(time),
+    'Time Read: ' + time,
     styles.paragraphRowFlexable
   );
   const dateBox = DisplayBox(
