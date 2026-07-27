@@ -47,7 +47,7 @@ function GetTheLogLook(notes, summery, bookName, fristPage, lastPage, time, date
   };
   function getTimeLook(time) {
     const hr = String(time).split("/")[0];
-    const min = String(time).split("/")[0];
+    const min = String(time).split("/")[1];
     var returnString = "";
     if (parseInt(hr) != 0) {
       returnString = hr + " Hours"
