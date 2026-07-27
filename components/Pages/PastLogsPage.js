@@ -1,5 +1,5 @@
 import { Text, StyleSheet, View, Button, Pressable, Modal } from 'react-native';
-import { useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 // You can import supported modules from npm
 import { Card } from 'react-native-paper';
@@ -19,135 +19,9 @@ import User, { StudentUser, TuterUser, ParentUser } from '../InfoHolders/User';
 import MakeScroll, { MakeScrollHorizontal } from '../Objects/MakeScroll';
 import { Screen } from 'expo-router/build/views/Screen';
 import { Dimensions } from 'react-native';
-import { GetConnectedUser } from '../../GetSaveUserFromServer';
+import { GetConnectedUser, removeLog, saveUserDataLocaly } from '../../GetSaveUserFromServer';
 import App, { PhoneView } from '../../App';
 
-
-
-
-function GetTheLogLook(notes, summery, bookName, fristPage, lastPage, time, date = new Date, studentName, loggedUnderName) {
-  //const [deleteLogButton, setDeleteLogButton] = useState(false)
-
-  const displayTime = (time) => {
-    const sec = parseInt(time, 10); // convert value to number if it's string
-    let hours = Math.floor(sec / 3600); // get hours
-    let minutes = Math.floor((sec - hours * 3600) / 60); // get minutes
-    let seconds = sec - hours * 3600 - minutes * 60; //  get seconds
-    // add 0 if value < 10
-    if (hours < 10) {
-      hours = '0' + hours;
-    }
-    if (minutes < 10) {
-      minutes = '0' + minutes;
-    }
-    if (seconds < 10) {
-      seconds = '0' + seconds;
-    }
-    return hours + ':' + minutes + ':' + seconds;
-  };
-  function getTimeLook(time) {
-    const hr = String(time).split("/")[0];
-    const min = String(time).split("/")[1];
-    var returnString = "";
-    if (parseInt(hr) != 0) {
-      returnString = hr + " Hours"
-
-      if (parseInt(min != 0)) {
-        returnString = hr + " Hours, " + min + " Minutes"
-      }
-
-    }
-    else if (parseInt(min != 0)) {
-      returnString = min + " Minutes"
-    }
-    return returnString
-
-
-  }
-  const DisplayDay = (dateMade = new Date) => {
-    console.log(Date(dateMade))
-
-    const dateInst = new Date(dateMade)
-    return (
-      (dateInst.getMonth() + 1) +
-      '/' +
-      dateInst.getDate() +
-      '/' +
-      dateInst.getFullYear()
-    );
-  }
-  const DisplayBox = (
-    dispText,
-    sty = styles.paragraphFlexable,
-    textSty = styles.textStyle
-  ) => {
-    return (
-      <View style={{ ...sty, flex: 1, flexGrow: 1 }} >
-        <Text style={{ ...textSty, textAlign: 'center', textAlignVertical: 'center', flexWrap: 'nowrap', padding: 2, alignSelf: 'center', flexShrink: 1 }} > {dispText} </Text>
-      </View>
-    );
-  }
-  const notesLogBox = DisplayBox('Notes: ' + notes, styles.paragraphRowFlexable);
-  const summeryLogBox = DisplayBox('Summery: ' + summery, styles.paragraphRowFlexable);
-  const bookLogBox = DisplayBox(
-    'Read "' + bookName + '" From Page ' + fristPage + ' To Page ' + lastPage,
-    styles.paragraphRowFlexable
-  );
-
-  const timeBox = DisplayBox(
-    'Time Read: ' + getTimeLook(time),
-    styles.paragraphRowFlexable
-  );
-  const dateBox = DisplayBox(
-    'Date: ' + DisplayDay(date),
-    styles.paragraphRowFlexable
-  );
-  const logForBox = DisplayBox(
-    'Reading Log For ' + studentName,
-    styles.paragraphRowFlexable
-  );
-  const loggedUnderBox = DisplayBox(
-    'Reading Logged By ' + loggedUnderName,
-    styles.paragraphRowFlexable
-  );
-  var sty = styles.logView
-  if (PhoneView()) {
-    sty = { ...styles.logView, maxWidth: 300 };
-  }
-  var deleteLogButton = true;
-  //const [deleteLogButton, setDeleteLogButton] = useState(false)
-  const changeDeleteLogButton = () => {
-    console.log("Show Delete Button")
-    deleteLogButton = true
-  }
-
-  return (
-    <View style={sty}>
-      <View style={styles.cornerView}>
-        <View style={styles.containerRow}>
-          {deleteLogButton && <View><Button title='Delete'></Button></View>}
-          <Button title='...' onPress={() => changeDeleteLogButton()}></Button>
-        </View>
-
-
-      </View>
-
-      <View style={styles.centerer}>{logForBox}</View>
-      <View style={styles.centerer}>{loggedUnderBox}</View>
-      <View style={styles.centerer}>{bookLogBox}</View>
-      <View style={styles.centerer}>{notes != '' && notesLogBox}</View>
-      <View style={styles.centerer}>{summery != '' && summeryLogBox}</View>
-      <View style={{ ...styles.centerer, flexDirection: 'row', flexWrap: 'wrap', flex: 1, flexShrink: 1 }}>
-        <View style={styles.centerer}>{timeBox}</View>
-        <View style={styles.centerer}>{dateBox}</View>
-      </View>
-
-
-
-
-    </View>
-  );
-}
 
 export default function PastLogsPage() {
 
@@ -208,7 +82,7 @@ export default function PastLogsPage() {
       const studentLogs = <View style={{ flex: 3 }}>{MakeScroll(await data['Logs'].map((log) => GetTheLogLook(log['Notes'], log['Summery'],
         log['Book'], log['PageFirst'], log['PageLast'],
         log['Time'], log['Date'], log['LoggedForName'],
-        log['LoggedUnderName'])).reverse()
+        log['LoggedUnderName'], data['Email'], data["UserType"], data["_id"], log, data['Logs'].indexOf(log))).reverse()
         , window.height - height)}</View>
 
       setSeeConnectedUserLogs(true)
@@ -286,6 +160,8 @@ export default function PastLogsPage() {
   console.log(userAspects)
   console.log(" Window Height: " + window.height)
 
+
+
   return (
     <View style={styles.containerRow}>
       <SideBar />
@@ -303,7 +179,7 @@ export default function PastLogsPage() {
 
         {userAspects['UserType'] == 'Student' && MakeScroll(
           userAspects['Logs'] &&
-          userAspects['Logs'].map((log) => GetTheLogLook(log['Notes'], log['Summery'], log['Book'], log['PageFirst'], log['PageLast'], log['Time'], log['Date'], log['LoggedForName'], log['LoggedUnderName'])).reverse()
+          userAspects['Logs'].map((log) => GetTheLogLook(log['Notes'], log['Summery'], log['Book'], log['PageFirst'], log['PageLast'], log['Time'], log['Date'], log['LoggedForName'], log['LoggedUnderName'], userAspects['Email'], userAspects['UserType'], userAspects['_id'], log, userAspects['Logs'].indexOf(log))).reverse()
           , heightFunction
         )}
 
@@ -315,5 +191,145 @@ export default function PastLogsPage() {
 
 
     </View >
+  );
+}
+
+async function removeDaLog(userEmail, userId, userType, userLog, logIndex) {
+  await saveUserToken(await removeLog(userEmail, userId, userType, userLog, logIndex))
+}
+
+function GetTheLogLook(notes, summery, bookName, fristPage, lastPage, time, date = new Date, studentName, loggedUnderName, userEmail, userType, userId, userLog, logIndex) {
+  //const [deleteLogButton, setDeleteLogButton] = useState(false)
+
+  const displayTime = (time) => {
+    const sec = parseInt(time, 10); // convert value to number if it's string
+    let hours = Math.floor(sec / 3600); // get hours
+    let minutes = Math.floor((sec - hours * 3600) / 60); // get minutes
+    let seconds = sec - hours * 3600 - minutes * 60; //  get seconds
+    // add 0 if value < 10
+    if (hours < 10) {
+      hours = '0' + hours;
+    }
+    if (minutes < 10) {
+      minutes = '0' + minutes;
+    }
+    if (seconds < 10) {
+      seconds = '0' + seconds;
+    }
+    return hours + ':' + minutes + ':' + seconds;
+  };
+  function getTimeLook(time) {
+    const hr = String(time).split("/")[0];
+    const min = String(time).split("/")[1];
+    var returnString = "";
+    console.log(hr + "HR")
+    console.log(min + "MIN")
+    if (parseInt(hr) != 0) {
+      returnString = hr + " Hours"
+
+      if (parseInt(min) != 0) {
+        returnString = hr + " Hours, " + min + " Minutes"
+      }
+
+    }
+    else if (parseInt(min) != 0) {
+      returnString = min + " Minutes"
+      console.log("MINtest")
+    }
+    return returnString
+
+
+  }
+  const DisplayDay = (dateMade = new Date) => {
+    console.log(Date(dateMade))
+
+    const dateInst = new Date(dateMade)
+    return (
+      (dateInst.getMonth() + 1) +
+      '/' +
+      dateInst.getDate() +
+      '/' +
+      dateInst.getFullYear()
+    );
+  }
+  const DisplayBox = (
+    dispText,
+    sty = styles.paragraphFlexable,
+    textSty = styles.textStyle
+  ) => {
+    return (
+      <View style={{ ...sty, flex: 1, flexGrow: 1 }} >
+        <Text style={{ ...textSty, textAlign: 'center', textAlignVertical: 'center', flexWrap: 'nowrap', padding: 2, alignSelf: 'center', flexShrink: 1 }} > {dispText} </Text>
+      </View>
+    );
+  }
+  const notesLogBox = DisplayBox('Notes: ' + notes, styles.paragraphRowFlexable);
+  const summeryLogBox = DisplayBox('Summery: ' + summery, styles.paragraphRowFlexable);
+  const bookLogBox = DisplayBox(
+    'Read "' + bookName + '" From Page ' + fristPage + ' To Page ' + lastPage,
+    styles.paragraphRowFlexable
+  );
+
+  const timeBox = DisplayBox(
+    'Time Read: ' + getTimeLook(time),
+    styles.paragraphRowFlexable
+  );
+  const dateBox = DisplayBox(
+    'Date: ' + DisplayDay(date),
+    styles.paragraphRowFlexable
+  );
+  const logForBox = DisplayBox(
+    'Reading Log For ' + studentName,
+    styles.paragraphRowFlexable
+  );
+  const loggedUnderBox = DisplayBox(
+    'Reading Logged By ' + loggedUnderName,
+    styles.paragraphRowFlexable
+  );
+  var sty = styles.logView
+  if (PhoneView()) {
+    sty = { ...styles.logView, maxWidth: 300 };
+  }
+  var deleteLogButton = true;
+  //const [deleteLogButton, setDeleteLogButton] = useState(false)
+
+  //const deleteLogButton = useRef(true);
+  const changeDeleteLogButton = () => {
+
+    //deleteLogButton = true
+
+  }
+  const DeleteLogButtonPressed = (log) => {
+    console.log("Delete")
+    removeDaLog(userEmail, userId, userType, userLog, logIndex)
+    //deleteLogButton = true
+
+  }
+
+  return (
+    <View style={sty}>
+      <View style={styles.cornerView}>
+        <View style={styles.containerRow}>
+          {deleteLogButton && <View><Button title='Delete' onPress={() => DeleteLogButtonPressed()}></Button></View>}
+          {false && <Button title='...' onPress={() => DeleteLogButtonPressed()}></Button>}
+        </View>
+
+
+      </View>
+
+      <View style={styles.centerer}>{logForBox}</View>
+      <View style={styles.centerer}>{loggedUnderBox}</View>
+      <View style={styles.centerer}>{bookLogBox}</View>
+      <View style={styles.centerer}>{notes != '' && notesLogBox}</View>
+      <View style={styles.centerer}>{summery != '' && summeryLogBox}</View>
+      <View style={{ ...styles.centerer, flexDirection: 'row', flexWrap: 'wrap', flex: 1, flexShrink: 1 }}>
+        <View style={styles.centerer}>{timeBox}</View>
+        <View style={styles.centerer}>{dateBox}</View>
+      </View>
+
+
+
+
+    </View>
   );
 }

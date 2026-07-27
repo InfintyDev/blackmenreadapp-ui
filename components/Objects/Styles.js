@@ -139,6 +139,12 @@ const styles = StyleSheet.create({
     verticalAlign: 'middle',
     alignSelf: 'center',
   },
+  containerColoumUp: {
+    flexDirection: 'column',
+    flex: 1,
+    verticalAlign: 'top',
+    alignSelf: 'flex-start',
+  },
   containerUp: {
 
     flex: 1,
