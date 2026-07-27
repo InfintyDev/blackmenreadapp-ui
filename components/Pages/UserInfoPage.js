@@ -70,7 +70,7 @@ export default function UserInfoPage() {
         return <View style={styles.containerColoum}>
           <Card style={styles.paddedCard}><Text>Badges</Text></Card>
 
-          <Card style={styles.paddedCard}><Text>Total Time Read: {userAspects['ReadingStats']['TotalTimeRead']} </Text></Card>
+          <Card style={styles.paddedCard}><Text>Total Time Read: {getTimeLook(String(userAspects['ReadingStats']['TotalTimeRead']))} </Text></Card>
           <Card style={styles.paddedCard}><Text>Books Read: {Object.keys(userAspects['ReadingStats']['BooksRead']).map((value) => <View><Text> "{value}": {userAspects['ReadingStats']['BooksRead'][value]['TimeRead']} </Text></View>)} </Text></Card>
 
 
@@ -106,6 +106,29 @@ export default function UserInfoPage() {
 
     const response = connectUserTo(userAspects['Email'], userAspects['_id'], userAspects['UserType'], email, id)
     saveUserToken(await response)
+  }
+
+  function getTimeLook(time) {
+    const hr = String(time).split("/")[0];
+    const min = String(time).split("/")[1];
+    var returnString = "";
+    console.log(hr + "HR")
+    console.log(min + "MIN")
+    if (parseInt(hr) != 0) {
+      returnString = hr + " Hours"
+
+      if (parseInt(min) != 0) {
+        returnString = hr + " Hours, " + min + " Minutes"
+      }
+
+    }
+    else if (parseInt(min) != 0) {
+      returnString = min + " Minutes"
+      console.log("MINtest")
+    }
+    return returnString
+
+
   }
 
   const connectUserPopUp = () => {

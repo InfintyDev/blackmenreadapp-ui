@@ -42,7 +42,7 @@ export const saveUserToken = async (token) => {
 };
 export const saveUserDataLocaly = async (userData) => {
   try {
-
+    AsyncStorage.setItem('userToken', userData)
     // Handle successful response, e.g., navigate to a different screen
   } catch (error) {
     console.error('Error saving user:', error);
@@ -241,6 +241,41 @@ export const removeConnectedUser = async (connectToEmail = '', connectToId, Conn
           toUsertype: ConnectToUsertype,
           removeEmail: removeEmail,
           removeId: removeId
+
+        }
+      })
+    });
+
+
+    return await response.json();
+
+
+
+    // Handle successful response, e.g., navigate to a different screen
+  } catch (error) {
+    console.error('Error Logging in:', error);
+    // Handle error, e.g., display an error message to the user
+  }
+};
+
+
+
+export const removeLog = async (connectToEmail = '', connectToId, userType, log, logIndex = 0) => {
+  console.log('addLog')
+  try {
+    const response = await fetch(pathToWebSite + '/RemoveLog', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({
+        user: {
+          email: connectToEmail,
+          id: connectToId,
+          usertype: "Student",
+          log: log,
+          logindex: logIndex
 
         }
       })
