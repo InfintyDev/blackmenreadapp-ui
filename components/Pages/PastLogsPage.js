@@ -45,6 +45,25 @@ function GetTheLogLook(notes, summery, bookName, fristPage, lastPage, time, date
     }
     return hours + ':' + minutes + ':' + seconds;
   };
+  function getTimeLook(time) {
+    const hr = String(time).split("/")[0];
+    const min = String(time).split("/")[0];
+    const returnString = "";
+    if (parseInt(hr) != 0) {
+      returnString = hr + " Hours"
+
+      if (parseInt(min != 0)) {
+        returnString = hr + " Hours, " + min + " Minutes"
+      }
+
+    }
+    else if (parseInt(min != 0)) {
+      returnString = min + " Minutes"
+    }
+    return returnString
+
+
+  }
   const DisplayDay = (dateMade = new Date) => {
     console.log(Date(dateMade))
 
@@ -76,7 +95,7 @@ function GetTheLogLook(notes, summery, bookName, fristPage, lastPage, time, date
   );
 
   const timeBox = DisplayBox(
-    'Time Read: ' + time,
+    'Time Read: ' + getTimeLook(time),
     styles.paragraphRowFlexable
   );
   const dateBox = DisplayBox(
