@@ -90,10 +90,10 @@ export default function FrontPage() {
 
         </View>
 
-        <View>
+        {userAspects['ReadingStats'] && <View>
 
-          {userAspects['UserType'] == 'Student' && <Card style={styles.paddedCard}><Text>Total Time Read: {getTimeLook(String(userAspects['ReadingStats']['TotalTimeRead']))} </Text></Card>}
-        </View>
+          {userAspects['ReadingStats']['TotalTimeRead'] && userAspects['UserType'] == 'Student' && <Card style={styles.paddedCard}><Text>Total Time Read: {getTimeLook(String(userAspects['ReadingStats']['TotalTimeRead']))} </Text></Card>}
+        </View>}
       </View>
 
 
