@@ -25,6 +25,7 @@ import App, { PhoneView } from '../../App';
 
 export default function PastLogsPage() {
 
+
   const [userAspects, setUserAspects] = useState({});
   const [shouldSetUserAspects, setShouldSetUserAspects] = useState(true);
   const [window, setWindow] = useState(Dimensions.get('window'))
@@ -46,18 +47,30 @@ export default function PastLogsPage() {
       console.log('falure to retrive');
     }
   };
-  async function GetUserAspects() {
-    const mostLikelyUser = getUserToken();
-    if (mostLikelyUser != null) {
-      return await mostLikelyUser;
-    }
-  };
+
+
+
+
   function canset(toset) {
     if (shouldSetUserAspects) {
       setUserAspects(toset)
       setShouldSetUserAspects(false)
     }
   }
+  async function GetUserAspects() {
+    const mostLikelyUser = getUserToken();
+    if (mostLikelyUser != null) {
+      return await mostLikelyUser;
+    }
+  };
+
+  async function reload() {
+    setShouldSetUserAspects(true)
+    await GetUserAspects().then((toset) => canset(toset))
+  }
+  GetUserAspects().then((toset) => canset(toset))
+
+
   const heightFunction = () => {
     return window.height;
   }
@@ -65,7 +78,7 @@ export default function PastLogsPage() {
   const [seeConectedUserLogs, setSeeConnectedUserLogs] = useState(false)
   const [viewConnectedLogs, setViewConnectedLogs] = useState(<View></View>)
 
-  GetUserAspects().then((toset) => canset(toset))
+
   console.log(userAspects)
 
 
@@ -82,7 +95,7 @@ export default function PastLogsPage() {
       const studentLogs = <View style={{ flex: 3 }}>{MakeScroll(await data['Logs'].map((log) => GetTheLogLook(log['Notes'], log['Summery'],
         log['Book'], log['PageFirst'], log['PageLast'],
         log['Time'], log['Date'], log['LoggedForName'],
-        log['LoggedUnderName'], data['Email'], data["UserType"], data["_id"], log, data['Logs'].indexOf(log))).reverse()
+        log['LoggedUnderName'], data['Email'], data["UserType"], data["_id"], log, data['Logs'].indexOf(log), () => { reload() })).reverse()
         , window.height - height)}</View>
 
       setSeeConnectedUserLogs(true)
@@ -179,7 +192,7 @@ export default function PastLogsPage() {
 
         {userAspects['UserType'] == 'Student' && MakeScroll(
           userAspects['Logs'] &&
-          userAspects['Logs'].map((log) => GetTheLogLook(log['Notes'], log['Summery'], log['Book'], log['PageFirst'], log['PageLast'], log['Time'], log['Date'], log['LoggedForName'], log['LoggedUnderName'], userAspects['Email'], userAspects['UserType'], userAspects['_id'], log, userAspects['Logs'].indexOf(log))).reverse()
+          userAspects['Logs'].map((log) => GetTheLogLook(log['Notes'], log['Summery'], log['Book'], log['PageFirst'], log['PageLast'], log['Time'], log['Date'], log['LoggedForName'], log['LoggedUnderName'], userAspects['Email'], userAspects['UserType'], userAspects['_id'], log, userAspects['Logs'].indexOf(log), () => reload())).reverse()
           , heightFunction
         )}
 
@@ -194,11 +207,35 @@ export default function PastLogsPage() {
   );
 }
 
-async function removeDaLog(userEmail, userId, userType, userLog, logIndex) {
-  await saveUserToken(await removeLog(userEmail, userId, userType, userLog, logIndex))
+async function removeDaLog(userEmail, userId, userType, userLog, logIndex, reaction) {
+  removeLog(userEmail, userId, userType, userLog, logIndex)
+  //const [useReload, setUseReload] = useState(true)
+  var usertoken = await getUserToken()
+
+
+  var logs = await usertoken["Logs"];
+
+  const arrayTest = ["", ""]
+  console.log(typeof (arrayTest))
+
+
+  if (logs.length == 0) {
+    logs = []
+  }
+  logs.splice(logIndex, 1)
+
+
+
+  usertoken["Logs"] = logs
+
+  await saveUserToken(usertoken)
+  reaction()
+  //setUseReload(false)
+
+
 }
 
-function GetTheLogLook(notes, summery, bookName, fristPage, lastPage, time, date = new Date, studentName, loggedUnderName, userEmail, userType, userId, userLog, logIndex) {
+function GetTheLogLook(notes, summery, bookName, fristPage, lastPage, time, date = new Date, studentName, loggedUnderName, userEmail, userType, userId, userLog, logIndex, reaction) {
   //const [deleteLogButton, setDeleteLogButton] = useState(false)
 
   const displayTime = (time) => {
@@ -301,7 +338,9 @@ function GetTheLogLook(notes, summery, bookName, fristPage, lastPage, time, date
   }
   const DeleteLogButtonPressed = (log) => {
     console.log("Delete")
-    removeDaLog(userEmail, userId, userType, userLog, logIndex)
+
+    removeDaLog(userEmail, userId, userType, userLog, logIndex, () => reaction())
+
     //deleteLogButton = true
 
   }
