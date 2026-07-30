@@ -39,6 +39,22 @@ import LogInSelectorPage from './components/Pages/LogInSelectorPage.js';
 import SettingsPage from './components/Pages/SettingsPage.js';
 import StudentStatisticsPage from './components/Pages/StudentStatisticsPage.js';
 
+//import CookieManager from '@react-native-cookies/cookies';
+
+
+async function MakeCookies() {
+
+  const url = 'http://localhost:8081/';
+  await fetch(url);
+  // axios alternative: await axios(url);
+
+
+  const cookies = await CookieManager.get(url);
+
+  console.log(await cookies)
+
+
+}
 //import PageNotFound from './components/Pages/PageNotFound';
 
 //import PageNotFound from getImport('PageNotFound');
@@ -173,12 +189,16 @@ const Disp = () => {
 */
 
 export default function App() {
+
+
+
   useEffect(() => {
     Orientation.lockToPortrait(); // Lock when screen mounts
     return () => {
       Orientation.unlockAllOrientations(); // Unlock when leaving
     };
   }, []);
+  //MakeCookies();
   return <Navigation />;
 }
 //export default App;

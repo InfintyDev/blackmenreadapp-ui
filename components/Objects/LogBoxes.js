@@ -452,6 +452,7 @@ const LogBoxes = (time, userData = {}) => {
   if (PhoneView()) {
     styPhone = styles.containerColoum
   }
+
   return [
     <View style={{ ...styles.logView }}>
       <View style={styles.containerColoum}>
