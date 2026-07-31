@@ -46,14 +46,54 @@ import saveUserToken from '../SaveLoadUserLocal';
 import { addUserLogs, GetConnectedUser } from '../../GetSaveUserFromServer'
 
 import MakeScroll from '../Objects/MakeScroll.js';
+import { PopUpBox } from '../Objects/PopUp';
+
+
+const MakeImage = (imageSource, width = 0, height = 0, upOffSet, sideOffset) => {
 
 
 
+
+  return (
+    <Image
+      style={{ ...styles.scaledImage, width: width, height: height, transform: [{ translateY: upOffSet }] }}
+      source={imageSource}
+
+    />
+  );
+};
+const BallonImage = (requiredImage, speed = 1) => {
+
+  //const requireString = '../../assets/BallonsForCelebration' + color + '.png'
+  //console.log(requireString)
+  const [upOffset, setUpOffset] = useState(0)
+  const [offsetActive, setOffsetActive] = useState(true);
+  useEffect(() => {
+    let interval;
+    if (offsetActive) {
+      interval = setInterval(() => {
+        setUpOffset((prevSeconds) => prevSeconds - (1 * speed));
+      }, 10);
+    }
+
+
+    return () => clearInterval(interval);
+  }, [offsetActive, upOffset]);
+
+  return (
+    MakeImage(requiredImage, 100, 100, upOffset)
+
+  )
+
+
+}
 
 export default function RecordTimePage() {
   //const onPhone = PhoneView();
   const [userAspects, setUserAspects] = useState({});
   const [shouldSetUserAspects, setShouldSetUserAspects] = useState(true);
+  const [celebration, setCelebration] = useState(false);
+  const [celebrationVisible, setCelebrationVisible] = useState(false);
   const getUserToken = async () => {
     try {
       const jsonData = await AsyncStorage.getItem('userToken');
@@ -181,7 +221,106 @@ export default function RecordTimePage() {
     return [hours, minutes, seconds];
   };
 
+  const timeLoggedCelebration = () => {
+    console.log("Celebration")
+    setCelebrationVisible(true)
 
+  }
+  const celebrationOver = () => {
+
+    setCelebrationVisible(false)
+
+  }
+
+  const generateRandomNumber = (min, max) => {
+
+    const number = Math.floor(Math.random() * (max - min + 1)) + min;
+    return number
+  };
+  const CelebrationComponent = () => {
+    const upOffset = 650;
+    const leftOffset = 0;
+
+
+    return (
+      <View>
+
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={celebrationVisible}
+
+          onRequestClose={() => setCelebrationVisible(!celebrationVisible)}>
+
+          <View style={{ ...styles.centeredViewMiddleDown, top: upOffset, left: leftOffset, height: 100, width: 100 }}>
+            {BallonImage(require('../../assets/BallonsForCelebrationBlue.png'))}
+          </View>
+          <View style={{ ...styles.centeredViewMiddleDown, top: upOffset + 20, left: leftOffset + 90, height: 100, width: 100 }}>
+            {BallonImage(require('../../assets/BallonsForCelebrationGreen.png'), 1.3)}
+          </View>
+          <View style={{ ...styles.centeredViewMiddleDown, top: upOffset + 60, left: leftOffset + 20, height: 100, width: 100 }}>
+            {BallonImage(require('../../assets/BallonsForCelebrationRed.png'), 2)}
+          </View>
+          <View style={{ ...styles.centeredViewMiddleDown, top: upOffset + 10, left: leftOffset + 10, height: 100, width: 100 }}>
+            {BallonImage(require('../../assets/BallonsForCelebrationYellow.png'), 1.1)}
+          </View>
+          <View style={{ ...styles.centeredViewMiddleDown, top: upOffset + 50, left: leftOffset + 39, height: 100, width: 100 }}>
+            {BallonImage(require('../../assets/BallonsForCelebrationOrange.png'), 1.32)}
+          </View>
+          <View style={{ ...styles.centeredViewMiddleDown, top: upOffset + 50, left: leftOffset + 200, height: 100, width: 100 }}>
+            {BallonImage(require('../../assets/BallonsForCelebrationBlue.png'), 1.32)}
+          </View>
+          <View style={{ ...styles.centeredViewMiddleDown, top: upOffset + 50, left: leftOffset + 236, height: 100, width: 100 }}>
+            {BallonImage(require('../../assets/BallonsForCelebrationRed.png'), 1.21)}
+          </View>
+          <View style={{ ...styles.centeredViewMiddleDown, top: upOffset + 50, left: leftOffset + 164, height: 100, width: 100 }}>
+            {BallonImage(require('../../assets/BallonsForCelebrationGreen.png'), 1.21)}
+          </View>
+          <View style={{ ...styles.centeredViewMiddleDown, top: upOffset + 50, left: leftOffset + 340, height: 100, width: 100 }}>
+            {BallonImage(require('../../assets/BallonsForCelebrationBlue.png'), 1.21)}
+          </View>
+          <View style={{ ...styles.centeredViewMiddleDown, top: upOffset + 50, left: leftOffset + 400, height: 100, width: 100 }}>
+            {BallonImage(require('../../assets/BallonsForCelebrationRed.png'), 1.6)}
+          </View>
+          <View style={{ ...styles.centeredViewMiddleDown, top: upOffset + 10, left: leftOffset + 500, height: 100, width: 100 }}>
+            {BallonImage(require('../../assets/BallonsForCelebrationYellow.png'), 1.1)}
+          </View>
+
+
+
+
+
+
+          <View style={styles.centeredView}>
+
+            <Pressable onPress={() => { celebrationOver() }}>
+
+
+              <Card style={{ ...styles.paddedCard, padding: 23 }}>
+                <View>
+                  <Text>
+                    Congradulations You Logged Time
+
+                  </Text>
+                  <Text>
+
+                    Press Here To Continue
+                  </Text>
+
+
+                </View>
+              </Card>
+
+            </Pressable>
+
+
+          </View>
+
+
+        </Modal>
+
+      </View>)
+  }
   const [secondsValue, setSecondsValue] = useState('0');
   const [minutesValue, setMinutesValue] = useState('0');
   const [hoursValue, setHoursValue] = useState('0');
@@ -526,7 +665,7 @@ export default function RecordTimePage() {
           addUserLogs(studentSelectorValue['Email'], studentSelectorValue['id'], 'Student', theLog)
 
         }
-
+        timeLoggedCelebration()
         clearLogBoxes()
       }
 
@@ -575,11 +714,7 @@ export default function RecordTimePage() {
       <View style={{ ...styles.logView }}>
         <View style={styles.containerColoum}>
 
-          <View style={styles.logButton}>
-            <Pressable
 
-              onPress={() => LogButtonPressed()}><Card style={{ ...styles.paddedCard, margin: 5, backgroundColor: "#ffc20f" }}><Text>Log Time</Text></Card></Pressable>
-          </View>
           <View style={{ ...styPhone, flex: 1, flexWrap: 'wrap' }}>
             <View style={styles.containerRow}>
               <Text style={styles.tinyText}>Book: </Text>
@@ -658,6 +793,12 @@ export default function RecordTimePage() {
               useDropDown &&
               updateConnectedUsers()}</View>
 
+          <View style={styles.logButton}>
+            <Pressable
+
+              onPress={() => LogButtonPressed()}><Card style={{ ...styles.paddedCard, margin: 5, backgroundColor: "#ffc20f" }}><Text>Log Time</Text></Card></Pressable>
+          </View>
+
         </View>
       </View>
     ];
@@ -699,6 +840,7 @@ export default function RecordTimePage() {
             <View style={{ transform: [{ scale: .9, }], flex: 2 }}>{theLogBox[0]}</View>
           </View>
         </SafeAreaView>
+        <CelebrationComponent />
       </View>
     );
   }
@@ -712,6 +854,7 @@ export default function RecordTimePage() {
             {theLogBox[0]}
           </View>
         </SafeAreaView>
+        <CelebrationComponent />
       </View>
     );
   }

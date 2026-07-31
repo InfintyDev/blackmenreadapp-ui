@@ -727,6 +727,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  centeredViewMiddleDown: {
+
+    position: "absolute",
+    flexDirection: "column",
+
+    verticalAlign: 'top',
+
+
+
+
+    alignItems: 'center',
+  },
 
   cornerView: {
     flex: 1,
