@@ -18,6 +18,7 @@ import UpCommingEvents from '../Objects/UpComingEvents'
 import { getUserDataLocaly, saveBookRecToComputor } from '../../GetSaveUserFromServer';
 
 
+
 function getTimeLook(time) {
   const hr = String(time).split("/")[0];
   const min = String(time).split("/")[1];
@@ -76,6 +77,113 @@ export default function FrontPage() {
   }
   GetUserAspects().then((toset) => canset(toset))
   console.log(userAspects)
+  var numberOfDaysInARow = 0;
+  var numberOfLogsTotal = 0;
+  var numberOfPagesTotal = 0;
+  var longestReadingStreak = 0;
+  var currentReadingStreak = 0;
+  var logMadeToday = false;
+  const today = new Date();
+
+  const dateToDayMonthYear = (date = new Date()) => {
+    return String(date.getMonth()) + "/" + String(date.getDate()) + "/" + String(date.getFullYear())
+  }
+  const dateTheSame = (dateA = new Date(), dateB = new Date()) => {
+    if (dateToDayMonthYear(dateA) == dateToDayMonthYear(dateB)) {
+      return true;
+
+    }
+    return false;
+  }
+
+  const getLastDayFromDate = (date = new Date()) => {
+    var dateYesterDay = date;
+    dateYesterDay.setDate(date.getDate() - 1)
+    return dateYesterDay
+  }
+  const getCurrentReadingStreakFrom = (streakCurent = 0, logs, dateFrom = new Date()) => {
+    var streak = streakCurent;
+    const yesterDay = getLastDayFromDate(dateFrom)
+    for (let indexB = 0; indexB < logs.length; indexB++) {
+
+      const element = logs[indexB];
+      const dateMade = new Date(element["Date"])
+      if (dateTheSame(dateMade, yesterDay)) {
+        streak += 1
+        return getCurrentReadingStreakFrom(streak, logs, yesterDay)
+
+
+      }
+
+
+
+
+
+    }
+    return streak;
+
+  }
+  if (userAspects["Logs"]) {
+    const logs = userAspects["Logs"];
+    console.log(logs);
+    console.log(logs.length);
+    for (let index = 0; index < logs.length; index++) {
+      const element = logs[index];
+      //console.log(index)
+      //console.log(element)
+      if (element["Date"]) {
+        console.log(today);
+
+        const dateMade = new Date(element["Date"])
+        console.log(dateToDayMonthYear(today))
+        console.log(dateToDayMonthYear(dateMade))
+
+        if (dateTheSame(today, dateMade)) {
+          console.log("dateMadeToday")
+          logMadeToday = true;
+
+          console.log(getCurrentReadingStreakFrom(1, logs, today))
+
+          currentReadingStreak = getCurrentReadingStreakFrom(1, logs, today)
+
+        }
+        else {
+          const streakFrom = getCurrentReadingStreakFrom(1, logs, dateMade)
+          console.log("Streak: " + streakFrom)
+          if (longestReadingStreak == 0) {
+            longestReadingStreak = streakFrom
+          }
+          else if (streakFrom > longestReadingStreak) {
+            longestReadingStreak = streakFrom
+          }
+
+        }
+
+
+
+
+      }
+      if (element["PageFirst"]) {
+        if (element["PageLast"]) {
+
+          const pageFirst = parseInt(element["PageFirst"])
+          const pageLast = parseInt(element["PageLast"])
+
+          if (pageFirst < pageLast) {
+
+            const pagesRead = pageLast - pageFirst
+            if (pagesRead > 0) {
+              console.log(pagesRead)
+              numberOfPagesTotal += pagesRead
+            }
+
+          }
+        }
+
+      }
+    }
+    numberOfLogsTotal = logs.length;
+  }
 
 
   return (
@@ -93,6 +201,32 @@ export default function FrontPage() {
         {userAspects['ReadingStats'] && <View>
 
           {userAspects['ReadingStats']['TotalTimeRead'] && userAspects['UserType'] == 'Student' && <Card style={styles.paddedCard}><Text>Total Time Read: {getTimeLook(String(userAspects['ReadingStats']['TotalTimeRead']))} </Text></Card>}
+        </View>}
+
+        {numberOfDaysInARow != 0 && <View style={styles.centeredView}>
+          <Card style={styles.paddedCard}>
+            <Text>Days Read In A Row: {numberOfDaysInARow}</Text>
+          </Card>
+        </View>}
+        {numberOfLogsTotal != 0 && <View style={styles.centeredView}>
+          <Card style={styles.paddedCard}>
+            <Text>Total Logs: {numberOfLogsTotal}</Text>
+          </Card>
+        </View>}
+        {numberOfPagesTotal != 0 && <View style={styles.centeredView}>
+          <Card style={styles.paddedCard}>
+            <Text>Total Pages Read: {numberOfPagesTotal}</Text>
+          </Card>
+        </View>}
+        {longestReadingStreak != 0 && <View style={styles.centeredView}>
+          <Card style={styles.paddedCard}>
+            <Text>Longest Reading Streak: {longestReadingStreak}</Text>
+          </Card>
+        </View>}
+        {currentReadingStreak != 0 && <View style={styles.centeredView}>
+          <Card style={styles.paddedCard}>
+            <Text>Current Reading Streak: {currentReadingStreak}</Text>
+          </Card>
         </View>}
       </View>
 
