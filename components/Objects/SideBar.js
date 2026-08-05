@@ -22,24 +22,32 @@ export default function SideBar() {
   var pressableStyle = styles.container;
   var buttons = [
     ChagePageButton('Home', 'Home'),
-    ChagePageButton('Calander', 'Calander'),
-    ChagePageButton('Book List', 'Books'),
     ChagePageButton('Record Time', 'RecordTime'),
-    ChagePageButton('User Info', 'UserInfo'),
+
     ChagePageButton('Past Logs', 'PastLogs'),
-    ChagePageButton('Settings', 'Settings'),
-    ChagePageButton('Statistics', 'StudentStatistics')
+    ChagePageButton('Statistics', 'StudentStatistics'),
+    ChagePageButton('User Info', 'UserInfo'),
+    ChagePageButton('Book List', 'Books'),
+    ChagePageButton('Calander', 'Calander'),
+    ChagePageButton('Settings', 'Settings')
+
   ];
   if (PhoneView()) {
     buttons = [
       ChagePageButtonImage("Home", viewStyle, require('../../assets/HomeIcon.png'), imageWidth, imageHeight, pressableStyle),
-      ChagePageButtonImage("Calander", viewStyle, require('../../assets/CalanderIcon.png'), imageWidth, imageHeight, pressableStyle),
-      ChagePageButtonImage("Books", viewStyle, require('../../assets/BookIcon.png'), imageWidth, imageHeight, pressableStyle),
+
       ChagePageButtonImage("RecordTime", viewStyle, require('../../assets/RecordTimeIcon.png'), imageWidth, imageHeight, pressableStyle),
-      ChagePageButtonImage("UserInfo", viewStyle, require('../../assets/UserInfoIcon.png'), imageWidth, imageHeight, pressableStyle),
+
+
       ChagePageButtonImage("PastLogs", viewStyle, require('../../assets/PastLogsIcon.png'), imageWidth, imageHeight, pressableStyle),
-      ChagePageButtonImage("Settings", viewStyle, require('../../assets/SettingsIcon.png'), imageWidth, imageHeight, pressableStyle),
-      ChagePageButtonImage("StudentStatistics", viewStyle, require('../../assets/StudentStatisticsIcon.png'), imageWidth, imageHeight, pressableStyle)
+      ChagePageButtonImage("StudentStatistics", viewStyle, require('../../assets/StudentStatisticsIcon.png'), imageWidth, imageHeight, pressableStyle),
+      ChagePageButtonImage("UserInfo", viewStyle, require('../../assets/UserInfoIcon.png'), imageWidth, imageHeight, pressableStyle),
+      ChagePageButtonImage("Books", viewStyle, require('../../assets/BookIcon.png'), imageWidth, imageHeight, pressableStyle),
+
+
+      ChagePageButtonImage("Calander", viewStyle, require('../../assets/CalanderIcon.png'), imageWidth, imageHeight, pressableStyle),
+      ChagePageButtonImage("Settings", viewStyle, require('../../assets/SettingsIcon.png'), imageWidth, imageHeight, pressableStyle)
+
     ]
   }
 

@@ -185,6 +185,10 @@ export default function FrontPage() {
     numberOfLogsTotal = logs.length;
   }
 
+  if (longestReadingStreak < currentReadingStreak) {
+    longestReadingStreak = currentReadingStreak
+  }
+
 
   return (
     <View style={styles.containerRow}>
