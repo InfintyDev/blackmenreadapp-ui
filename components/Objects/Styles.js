@@ -22,6 +22,11 @@ const styles = StyleSheet.create({
     margin: 20,
     padding: 10,
   },
+  paddedCardFlex: {
+    flex: 1,
+    margin: 20,
+    padding: 10,
+  },
   paddedCardHalf: {
     margin: 10,
     padding: 5,
@@ -32,7 +37,7 @@ const styles = StyleSheet.create({
 
   },
   sideButtonStyle: {
-    //flex: 0,
+    flex: 1,
 
     //flexDirection:'column',
     alignContent: 'center',
@@ -135,6 +140,12 @@ const styles = StyleSheet.create({
   },
   containerColoum: {
     flexDirection: 'column',
+    flex: 1,
+    verticalAlign: 'middle',
+    alignSelf: 'center',
+  },
+  containerCenterMade: {
+    flexWrap: "wrap",
     flex: 1,
     verticalAlign: 'middle',
     alignSelf: 'center',

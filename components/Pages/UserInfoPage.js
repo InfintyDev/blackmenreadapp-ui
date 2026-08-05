@@ -71,7 +71,11 @@ export default function UserInfoPage() {
           <Card style={styles.paddedCard}><Text>Badges</Text></Card>
 
           <Card style={styles.paddedCard}><Text>Total Time Read: {getTimeLook(String(userAspects['ReadingStats']['TotalTimeRead']))} </Text></Card>
-          <Card style={styles.paddedCard}><Text>Books Read: {Object.keys(userAspects['ReadingStats']['BooksRead']).map((value) => <View><Text> "{value}": {userAspects['ReadingStats']['BooksRead'][value]['TimeRead']} </Text></View>)} </Text></Card>
+          <Card style={styles.paddedCard}><Text>Books Read  </Text></Card>
+          <View style={styles.containerCenterMade}>
+            {Object.keys(userAspects['ReadingStats']['BooksRead']).map((value) => <View><Card style={{ ...styles.paddedCard, margin: 4, padding: 4 }}><Text>"{value}"{userAspects['ReadingStats']['BooksRead'][value]['TimeRead']}</Text></Card></View>)}
+
+          </View>
 
 
         </View >;
