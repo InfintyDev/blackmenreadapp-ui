@@ -12,7 +12,7 @@ import styles from '../Objects/Styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SideBar, { SideBarExclued } from '../Objects/SideBar'
 
-
+import { Router, Link } from 'expo-router';
 import User from '../InfoHolders/User';
 import UpCommingEvents from '../Objects/UpComingEvents'
 import { getUserDataLocaly, saveBookRecToComputor } from '../../GetSaveUserFromServer';
@@ -188,7 +188,15 @@ export default function FrontPage() {
   if (longestReadingStreak < currentReadingStreak) {
     longestReadingStreak = currentReadingStreak
   }
+  const BlackMenReadLink = () => {
+    return (
+      <View>
+        <Link href={"https://www.blackmenread.org/"}>Black Men Read Website</Link>
+      </View>
 
+
+    )
+  }
 
   return (
     <View style={styles.containerRow}>
@@ -232,6 +240,12 @@ export default function FrontPage() {
             <Text>Current Reading Streak: {currentReadingStreak}</Text>
           </Card>
         </View>}
+
+        <View style={styles.centeredView}>
+          <Card style={styles.paddedCard}>
+            {BlackMenReadLink()}
+          </Card>
+        </View>
       </View>
 
 
