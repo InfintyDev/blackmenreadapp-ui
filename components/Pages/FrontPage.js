@@ -39,6 +39,66 @@ function getTimeLook(time) {
   }
   return returnString
 
+}
+
+function getBadges(time) {
+  const hr = String(time).split("/")[0];
+  const min = String(time).split("/")[1];
+  var minTotal = parseInt(min) + (parseInt(hr) * 60)
+  var badgeTime = 0;
+  var timeTillNextBadge = 120;
+  var returnString = ""
+
+
+
+
+  if (parseInt(hr) > 2) {
+    badgeTime = Math.floor(minTotal / 120);
+
+
+    returnString = String(badgeTime)
+
+
+  }
+  else {
+    returnString = "Read At Least Two Hours To Get A Badge"
+  }
+  minTotal = minTotal % 120
+  minTotal = timeTillNextBadge - minTotal
+
+  console.log("MinConvert: " + minTotal);
+
+  const readMorehr = Math.floor(minTotal / 60)
+  const readMoreMin = minTotal % 60
+  if (badgeTime == 1) {
+    returnString = "You Have " + badgeTime + " Badge,"
+  }
+  else if (badgeTime == 0) {
+    returnString = "You Have No Badges But,"
+  }
+  else {
+    returnString = "You Have " + badgeTime + " Badges,"
+  }
+
+  if (readMorehr > 0) {
+
+    if (readMoreMin > 0) {
+      returnString += " Read " + readMorehr + " Hours And " + readMoreMin + " Minutes More For The Next Badge"
+    }
+    else {
+      returnString += " Read " + readMorehr + " Hours More For The Next Badge"
+    }
+
+  }
+  else {
+    if (readMoreMin > 0) {
+      returnString += " Read " + readMoreMin + " Minutes More For The Next Badge"
+    }
+  }
+
+
+  return returnString;
+
 
 }
 
@@ -82,7 +142,9 @@ export default function FrontPage() {
   var numberOfPagesTotal = 0;
   var longestReadingStreak = 0;
   var currentReadingStreak = 0;
+  var totalTime = 0;
   var logMadeToday = false;
+  var timeString = "0/0/0"
   const today = new Date();
 
   const dateToDayMonthYear = (date = new Date()) => {
@@ -125,31 +187,31 @@ export default function FrontPage() {
   }
   if (userAspects["Logs"]) {
     const logs = userAspects["Logs"];
-    console.log(logs);
-    console.log(logs.length);
+    //console.log(logs);
+    //console.log(logs.length);
     for (let index = 0; index < logs.length; index++) {
       const element = logs[index];
       //console.log(index)
       //console.log(element)
       if (element["Date"]) {
-        console.log(today);
+        //console.log(today);
 
         const dateMade = new Date(element["Date"])
-        console.log(dateToDayMonthYear(today))
-        console.log(dateToDayMonthYear(dateMade))
+        //console.log(dateToDayMonthYear(today))
+        //console.log(dateToDayMonthYear(dateMade))
 
         if (dateTheSame(today, dateMade)) {
-          console.log("dateMadeToday")
+          //console.log("dateMadeToday")
           logMadeToday = true;
 
-          console.log(getCurrentReadingStreakFrom(1, logs, today))
+          //console.log(getCurrentReadingStreakFrom(1, logs, today))
 
           currentReadingStreak = getCurrentReadingStreakFrom(1, logs, today)
 
         }
         else {
           const streakFrom = getCurrentReadingStreakFrom(1, logs, dateMade)
-          console.log("Streak: " + streakFrom)
+          //console.log("Streak: " + streakFrom)
           if (longestReadingStreak == 0) {
             longestReadingStreak = streakFrom
           }
@@ -173,7 +235,7 @@ export default function FrontPage() {
 
             const pagesRead = pageLast - pageFirst
             if (pagesRead > 0) {
-              console.log(pagesRead)
+              //console.log(pagesRead)
               numberOfPagesTotal += pagesRead
             }
 
@@ -181,10 +243,27 @@ export default function FrontPage() {
         }
 
       }
+      if (element["Time"]) {
+
+
+        const hr = parseInt(element["Time"].split("/")[0])
+        const min = parseInt(element["Time"].split("/")[1])
+
+
+        totalTime += (hr * 60) + min;
+        console.log(totalTime)
+
+      }
     }
     numberOfLogsTotal = logs.length;
   }
 
+  if (totalTime > 0) {
+    const hr = Math.floor(totalTime / 60)
+    const min = totalTime % 60
+    console.log(hr + "/" + min + "/")
+    timeString = hr + "/" + min + "/" + "00"
+  }
   if (longestReadingStreak < currentReadingStreak) {
     longestReadingStreak = currentReadingStreak
   }
@@ -212,7 +291,15 @@ export default function FrontPage() {
 
         {userAspects['ReadingStats'] && <View>
 
-          {userAspects['ReadingStats']['TotalTimeRead'] && userAspects['UserType'] == 'Student' && <Card style={styles.paddedCard}><Text>Total Time Read: {getTimeLook(String(userAspects['ReadingStats']['TotalTimeRead']))} </Text></Card>}
+          {userAspects['ReadingStats']['TotalTimeRead'] && userAspects['UserType'] == 'Student' && <Card style={styles.paddedCard}><Text>Total Time Read: {getTimeLook(timeString)} </Text></Card>}
+        </View>}
+
+
+
+
+        {userAspects['ReadingStats'] && <View>
+
+          {userAspects['ReadingStats']['TotalTimeRead'] && userAspects['UserType'] == 'Student' && <Card style={styles.paddedCard}><Text>Badges: {getBadges(timeString)} </Text></Card>}
         </View>}
 
         {numberOfDaysInARow != 0 && <View style={styles.centeredView}>
