@@ -330,7 +330,7 @@ export default function RecordTimePage() {
     const styView = styles.centeredContainerBlankBackGround;
     const notesLogBox = TypeBox('Notes', '', styles.paragraphBox, styles.textStyle, true);
     const summeryLogBox = TypeBox('Summery', '', styles.paragraphBox, styles.textStyle, true);
-    const bookLogBox = TypeBox('Book', '', styView, styles.textStyle, true, stylem.parBox);
+    const bookLogBox = TypeBox('', '', styView, styles.textStyle, true, stylem.parBox);
     const [invalidLog, setInvalidLog] = useState(false)
     const [logError, setLogError] = useState("");
 
@@ -602,6 +602,7 @@ export default function RecordTimePage() {
         console.log('valid Log')
       }
       var theLog = {}
+      var stringTest = "adf"
 
       if (studentSelectorValue['_id']) {
         theLog = {
@@ -610,7 +611,7 @@ export default function RecordTimePage() {
           LoggedUnder: userData['_id'],
           LoggedUnderName: userData["UserName"],
           LoggedUnderType: userData['UserType'],
-          Book: bookLogBox[1],
+          Book: bookLogBox[1].toLowerCase(),
           Time: hoursValue + '/' + minutesValue + "/" + secondsValue,
           Notes: notesLogBox[1],
           PageFirst: pageFirstLogBox[1],
@@ -626,7 +627,7 @@ export default function RecordTimePage() {
           LoggedUnder: userData['_id'],
           LoggedUnderName: userData["UserName"],
           LoggedUnderType: userData['UserType'],
-          Book: bookLogBox[1],
+          Book: bookLogBox[1].toLowerCase(),
           Time: hoursValue + '/' + minutesValue + "/" + secondsValue,
           Notes: notesLogBox[1],
           PageFirst: pageFirstLogBox[1],
