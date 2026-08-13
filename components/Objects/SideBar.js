@@ -29,7 +29,8 @@ export default function SideBar() {
     ChagePageButton('User Info', 'UserInfo'),
     ChagePageButton('Book List', 'Books'),
     ChagePageButton('Calander', 'Calander'),
-    ChagePageButton('Settings', 'Settings')
+    ChagePageButton('Settings', 'Settings'),
+    ChagePageButton('Set Goals', 'GoalSetting')
 
   ];
   if (PhoneView()) {
@@ -46,7 +47,8 @@ export default function SideBar() {
 
 
       ChagePageButtonImage("Calander", viewStyle, require('../../assets/CalanderIcon.png'), imageWidth, imageHeight, pressableStyle),
-      ChagePageButtonImage("Settings", viewStyle, require('../../assets/SettingsIcon.png'), imageWidth, imageHeight, pressableStyle)
+      ChagePageButtonImage("Settings", viewStyle, require('../../assets/SettingsIcon.png'), imageWidth, imageHeight, pressableStyle),
+      ChagePageButtonImage("GoalSetting", viewStyle, require('../../assets/SettingsIcon.png'), imageWidth, imageHeight, pressableStyle)
 
     ]
   }
@@ -61,6 +63,7 @@ export default function SideBar() {
       {buttons[5]}
       {buttons[6]}
       {buttons[7]}
+      {buttons[8]}
     </View>
   );
 }

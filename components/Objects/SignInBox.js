@@ -71,6 +71,7 @@ export default function SignInBox(userTypeAssigned = '', userUsed = true) {
   const [userInst, setUserInst] = useState(new User());
   const [loginFailed, setLoginFailed] = useState(false)
   const [logingInNow, setLogingInNow] = useState(false)
+  const [logInLoading, setLoginLoading] = useState(false);
 
   var users = new UserList();
   const [userNameLogBox, userNameLogBoxAwnser] = TypeBox(
@@ -117,6 +118,8 @@ export default function SignInBox(userTypeAssigned = '', userUsed = true) {
     }
   };
   const SignInConnect = async (email = '', password = '', userType = '') => {
+    setLoginLoading(true)
+    console.log("logInpressed")
     if (!logingInNow) {
       setLogingInNow(true)
       var useTypeOrSelect = '';
@@ -139,6 +142,7 @@ export default function SignInBox(userTypeAssigned = '', userUsed = true) {
         console.log('fail')
         setLoginFailed(true)
         setLogingInNow(false)
+        setLoginLoading(false)
       }
       else if (responce != null) {
 
@@ -196,10 +200,12 @@ export default function SignInBox(userTypeAssigned = '', userUsed = true) {
 
       </View>
       {loginFailed && <View><Text>The User Name or Password is Incorrect</Text></View>}
+      {logInLoading && <View><Text>Loading Please Wait</Text></View>}
 
       <Button
         title={'Log In'}
         onPress={() =>
+
           SignInConnect(userNameLogBoxAwnser, passwordLogBoxAwnser, userTypeSelected)
         } style={styles.button} />
 
