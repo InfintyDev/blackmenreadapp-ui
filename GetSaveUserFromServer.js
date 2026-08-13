@@ -191,6 +191,40 @@ export const addUserLogs = async (email = '', id, usertype = '', log, totalTimeR
 };
 
 
+export const addUserGoals = async (email = '', id, usertype = '', goal) => {
+  console.log('addGoal')
+  try {
+    const response = await fetch(pathToWebSite + '/AddUserGoal', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({
+        user: {
+          email: email,
+          id: id,
+          usertype: usertype,
+          goal: goal,
+
+
+        }
+      })
+    });
+
+
+    return await response.json();
+
+
+
+    // Handle successful response, e.g., navigate to a different screen
+  } catch (error) {
+    console.error('Error Logging in:', error);
+    // Handle error, e.g., display an error message to the user
+  }
+};
+
+
 export const connectUserTo = async (connectToEmail = '', connectToId, ConnectToUsertype = '', connectEmail = '', connectId = '') => {
   console.log('addLog')
   try {

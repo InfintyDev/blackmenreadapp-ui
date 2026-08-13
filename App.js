@@ -38,6 +38,7 @@ import PastLogsPage from './components/Pages/PastLogsPage'
 import LogInSelectorPage from './components/Pages/LogInSelectorPage.js';
 import SettingsPage from './components/Pages/SettingsPage.js';
 import StudentStatisticsPage from './components/Pages/StudentStatisticsPage.js';
+import GoalSettingPage from './components/Pages/GoalSettingPage.js';
 
 //import CookieManager from '@react-native-cookies/cookies';
 
@@ -123,6 +124,10 @@ const RootStack = createNativeStackNavigator({
       options: { title: 'Back' },
     }, StudentStatistics: {
       screen: StudentStatisticsPage,
+      options: { title: 'Back' },
+    },
+    GoalSetting: {
+      screen: GoalSettingPage,
       options: { title: 'Back' },
     }
 

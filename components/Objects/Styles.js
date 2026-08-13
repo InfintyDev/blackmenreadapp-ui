@@ -22,6 +22,11 @@ const styles = StyleSheet.create({
     margin: 20,
     padding: 10,
   },
+  paddedCardYellow: {
+    margin: 20,
+    padding: 10,
+    backgroundColor: "#ffda6dff"
+  },
   paddedCardFlex: {
     flex: 1,
     margin: 20,
@@ -881,6 +886,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'blue',
     borderRadius: 5,
   },
+  boxCalContain: {
+    height: 300,
+    width: 200,
+
+    borderRadius: 5,
+  },
   centerer: {
     verticalAlign: 'bottom',
     textAlign: 'center',
@@ -928,6 +939,12 @@ const styles = StyleSheet.create({
   },
   headerText: {
     margin: 24,
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  headerTextGoal: {
+
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',

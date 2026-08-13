@@ -329,7 +329,7 @@ export default function FrontPage() {
         </View>}
 
         <View style={styles.centeredView}>
-          <Card style={styles.paddedCard}>
+          <Card style={styles.paddedCardYellow}>
             {BlackMenReadLink()}
           </Card>
         </View>
